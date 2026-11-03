@@ -7,13 +7,18 @@ import { renderingGeometry } from "./geo-render";
 import { createEarthSurface } from "./surface-webgl";
 import { drawFootprintStars } from "./starfield";
 import { footprintView, footprintCard } from "./layout";
-export function mountFootprint() {
+export function mountFootprint(container, assetBase) {
   "use strict";
-  const scope = document.getElementById("footprint");
-  const $ = (id) =>
-    id === "footprint" ? scope : scope.querySelector("#" + id);
+  const section = container
+    ? (container.querySelector(".footprint, .footprint-stage, #footprint") || container)
+    : document.getElementById("footprint");
+  const byId = (id) =>
+    (section ? section.querySelector("#" + id) : null) ||
+    (container ? container.querySelector("#" + id) : null) ||
+    document.getElementById(id);
+  const $ = byId;
   const d3 = window.d3;
-  const stage = $("footprint");
+  const stage = section;
   const loading = $("loading-state");
   const listeners = [];
   const on = (target, event, fn) => {
@@ -92,9 +97,48 @@ export function mountFootprint() {
       ...countries.filter((f) => f.properties.kind === "region"),
       ...countries.filter((f) => f.properties.kind !== "region"),
     ];
-    const byId = new Map(
+    const featureById = new Map(
       features.map((feature) => [feature.properties.id, feature]),
     );
+
+    function backfillMissingCoords() {
+      const provinceIsoMap = {
+        "CN-BJ": "CN-11", "CN-TJ": "CN-12", "CN-HE": "CN-13", "CN-SX": "CN-14", "CN-NM": "CN-15",
+        "CN-LN": "CN-21", "CN-JL": "CN-22", "CN-HL": "CN-23", "CN-SH": "CN-31", "CN-JS": "CN-32",
+        "CN-ZJ": "CN-33", "CN-AH": "CN-34", "CN-FJ": "CN-35", "CN-JX": "CN-36", "CN-SD": "CN-37",
+        "CN-HA": "CN-41", "CN-HB": "CN-42", "CN-HN": "CN-43", "CN-GD": "CN-44", "CN-GX": "CN-45",
+        "CN-HI": "CN-46", "CN-CQ": "CN-50", "CN-SC": "CN-51", "CN-GZ": "CN-52", "CN-YN": "CN-53",
+        "CN-XZ": "CN-54", "CN-SN": "CN-61", "CN-GS": "CN-62", "CN-QH": "CN-63", "CN-NX": "CN-64",
+        "CN-XJ": "CN-65", "CN-TW": "CN-71", "CN-HK": "CN-91", "CN-MO": "CN-92"
+      };
+      summaries.forEach((summary, regionId) => {
+        if (!summary.location) summary.location = { coordinate: null, level: "地区定位" };
+        if (!summary.location.coordinate || !summary.location.coordinate.every(Number.isFinite)) {
+          const mappedId = provinceIsoMap[regionId] || regionId;
+          const matched = featureById.get(mappedId) || featureById.get(regionId) || features.find((f) =>
+            f.properties.id === mappedId ||
+            f.properties.id === regionId ||
+            f.properties.isoA2 === regionId ||
+            f.properties.countryCode === regionId ||
+            f.properties.nameZh === summary.name ||
+            f.properties.name === summary.name
+          );
+          if (matched) {
+            const centroid = Array.isArray(matched.properties.center)
+              ? matched.properties.center
+              : d3.geoCentroid(matched);
+            if (centroid && centroid.every(Number.isFinite)) {
+              summary.location.coordinate = centroid;
+              if (matched.properties.kind === "province") {
+                summary.location.level = "省级定位";
+              }
+            }
+          }
+        }
+      });
+    }
+    backfillMissingCoords();
+
     const sphere = { type: "Sphere" };
     const displayById = new Map(
       features.map((f) => [
@@ -112,8 +156,8 @@ export function mountFootprint() {
       .precision(0.18);
     const path = d3.geoPath(projection).digits(1);
     const graticule = d3.geoGraticule().step([15, 15])();
-    const svg = d3.select("#globe");
-    const earthSurface = createEarthSurface(stage);
+    const svg = d3.select(byId("globe"));
+    const earthSurface = createEarthSurface(stage, assetBase);
     const defs = svg.append("defs");
     const ocean = defs
       .append("radialGradient")
@@ -516,7 +560,12 @@ export function mountFootprint() {
           : "—";
         $("visit-date").classList.toggle("visit-date", !!visit);
         $("location-note").textContent =
-          summary.location.level + (!pointVisible ? " · 位置在地球另一侧" : "");
+          summary.location.level +
+          (!point
+            ? " · 该行程暂未配置坐标"
+            : !pointVisible
+            ? " · 当前位置在地球另一侧，拖动地球即可查看"
+            : "");
         const coordinateLabel=$("card-coordinates");
         if(coordinateLabel)coordinateLabel.textContent=point&&point.every(Number.isFinite)
           ? (point[1]>=0?'北纬 ':'南纬 ')+Math.abs(point[1]).toFixed(2)+'°　'+(point[0]>=0?'东经 ':'西经 ')+Math.abs(point[0]).toFixed(2)+'°' : '';
@@ -530,7 +579,7 @@ export function mountFootprint() {
             img.alt = summary.cover.photo.alt;
             img.loading = "lazy";
             img.src =
-              (document.documentElement.dataset.previewPrefix || "") + src;
+              (assetBase ? (assetBase === "/" ? "" : assetBase.replace(/\/$/, "")) : (document.documentElement.dataset.previewPrefix || "")) + src;
             img.addEventListener(
               "error",
               () => {
@@ -624,7 +673,7 @@ export function mountFootprint() {
       const shell=stage.closest('.footprint-immersion');
       const skyHeight=shell?shell.clientHeight:window.innerHeight;
       stage.style.setProperty('--fp-sky-height',skyHeight+'px');
-      drawFootprintStars($("starfield"),width,skyHeight);
+      drawFootprintStars(byId("starfield"),width,skyHeight,assetBase);
     }
     function resize() {
       if (disposed || !active() || stage.clientWidth < 60) return;
@@ -847,7 +896,7 @@ export function mountFootprint() {
     select.value = "";
     on(select, "change", () => {
       cancelDrag();
-      const feature = byId.get(select.value);
+      const feature = featureById.get(select.value);
       if (!feature) return;
       const coordinate = feature.properties.center;
       projection.rotate([-coordinate[0], -coordinate[1], 0]);
@@ -971,8 +1020,10 @@ export function mountFootprint() {
       },
       getSelected: () => selected?.properties.id || null,
     });
+    return dispose;
   } catch (error) {
-    loading.textContent = `足迹未能载入：${error.message}`;
+    if (loading) loading.textContent = `足迹未能载入：${error.message}`;
     console.error(error);
+    return () => {};
   }
 }

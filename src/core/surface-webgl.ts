@@ -6,7 +6,7 @@
 /** A demand-rendered texture layer sharing D3's orthographic orientation. */
 export interface EarthSurfaceView {width:number;height:number;cx:number;cy:number;radius:number;rotation:number[]}
 type RotationFactory=(angles:number[])=>((point:number[])=>number[]);
-export function createEarthSurface(stage:HTMLElement):{render(view:EarthSurfaceView):void;dispose():void}|null {
+export function createEarthSurface(stage:HTMLElement, assetBase?: string):{render(view:EarthSurfaceView):void;dispose():void}|null {
   const geoRotation=(window as unknown as {d3?:{geoRotation?:RotationFactory}}).d3?.geoRotation;
   if(!geoRotation)return null;
   const canvas=document.createElement('canvas');
@@ -144,7 +144,7 @@ export function createEarthSurface(stage:HTMLElement):{render(view:EarthSurfaceV
   };
   // This decorative historical layer is optional; day terrain remains usable on failure.
   nightImage.onerror=()=>{nightReady=false;nightImage.onload=null;nightImage.onerror=null;};
-  const rawBase=document.documentElement.dataset.previewPrefix??((import.meta as any).env?.BASE_URL||'./');
+  const rawBase = assetBase || (document.documentElement.dataset.previewPrefix ?? ((import.meta as any).env?.BASE_URL || './'));
   const prefix=rawBase==='/'?'':String(rawBase).replace(/\/$/,'');
   nightImage.src=prefix+'/maps/earth/earth-night.webp';
   image.src=prefix+'/maps/earth/earth-day.webp';

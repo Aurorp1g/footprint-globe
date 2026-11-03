@@ -2,6 +2,7 @@
  * Footprint Globe Stylesheet (Basalt Ink & Champagne Gold Editorial Edition)
  * Copyright (c) 2026 曾威长/Over9rowth. Released under the MIT License.
  */
+
 /* One immersive charcoal space and cool-blue globe, independent of site preference. */
 #footprint {
   color-scheme: dark;
@@ -898,18 +899,22 @@
 #footprint[data-earth-textured="true"] .sphere-outline { opacity:.22; }
 
 /* 2026-11-03 Visual Polish: Direction B — Basalt Ink & Restrained Champagne Gold Editorial Card */
+#footprint {
+  --fp-lit-start:#f6d89e;
+  --fp-lit-end:#cf9243;
+}
 #footprint .visit-card {
-  width:clamp(276px, 20vw, 304px);
-  padding:20px 20px 15px;
-  border-radius:6px;
-  border:1px solid rgba(235, 226, 212, 0.13);
+  width:clamp(324px, 24vw, 356px);
+  padding:22px 24px 18px;
+  border-radius:7px;
+  border:1px solid rgba(235, 226, 212, 0.15);
   background:
-    radial-gradient(120% 80% at 12% 0%, rgba(208, 178, 132, 0.07) 0%, transparent 58%),
-    linear-gradient(168deg, rgba(19, 19, 22, 0.86) 0%, rgba(11, 12, 14, 0.92) 100%);
+    radial-gradient(120% 80% at 12% 0%, rgba(208, 178, 132, 0.08) 0%, transparent 58%),
+    linear-gradient(168deg, rgba(19, 19, 22, 0.88) 0%, rgba(11, 12, 14, 0.94) 100%);
   box-shadow:
-    inset 0 1px 0 rgba(245, 236, 222, 0.13),
-    0 20px 48px rgba(0, 0, 0, 0.68),
-    0 4px 14px rgba(0, 0, 0, 0.42);
+    inset 0 1px 0 rgba(245, 236, 222, 0.14),
+    0 22px 52px rgba(0, 0, 0, 0.7),
+    0 4px 14px rgba(0, 0, 0, 0.45);
   backdrop-filter:blur(14px);
   -webkit-backdrop-filter:blur(14px);
 }
@@ -917,22 +922,22 @@
   position:relative;
   display:flex;
   align-items:flex-start;
-  gap:10px;
-  min-height:44px;
-  margin-bottom:14px;
+  gap:12px;
+  min-height:52px;
+  margin-bottom:16px;
 }
 #footprint .card-pin {
-  width:15px;
-  height:19px;
+  width:17px;
+  height:21px;
   margin-top:4px;
-  fill:#c8ab83;
-  filter:none;
+  fill:#d8b888;
+  filter:drop-shadow(0 0 6px rgba(216, 184, 136, 0.25));
 }
 #footprint .card-pin circle {
   fill:#121215;
 }
 #footprint .card-heading-copy {
-  padding-right:64px;
+  padding-right:76px;
   max-width:100%;
   min-width:0;
 }
@@ -940,166 +945,183 @@
   display:flex;
   align-items:center;
   flex-wrap:wrap;
-  gap:6px 9px;
+  gap:7px 10px;
 }
 #footprint .card-heading h2 {
-  font:600 21px/1.25 Georgia,"Noto Serif SC","Songti SC","STSong",SimSun,serif;
+  font:600 24px/1.25 Georgia,"Noto Serif SC","Songti SC","STSong",SimSun,serif;
   letter-spacing:.06em;
-  color:#eeeae4;
+  color:#f2eee8;
   margin:0;
 }
 #footprint .card-heading-copy #card-role {
   display:inline-flex;
   align-items:center;
   margin:0;
-  padding:1px 7px;
+  padding:2px 8px;
   border-radius:3px;
-  background:rgba(200, 171, 131, 0.10);
-  border:1px solid rgba(200, 171, 131, 0.28);
-  font-size:11px;
+  background:rgba(208, 178, 132, 0.12);
+  border:1px solid rgba(208, 178, 132, 0.32);
+  font-size:11.5px;
   line-height:1.45;
   letter-spacing:.06em;
-  color:#d4ba96;
+  color:#dec39b;
 }
 #footprint .card-heading-copy #card-role:empty {
   display:none;
 }
 #footprint .card-coordinates {
-  margin:6px 0 0 0;
+  margin:7px 0 0 0;
   padding:0;
   display:block;
   white-space:nowrap;
   background:none;
   border:0;
-  color:#8f8a82;
-  font:400 11.5px/1.35 ui-monospace,"SFMono-Regular",Consolas,monospace;
+  color:#9a948b;
+  font:400 12px/1.35 ui-monospace,"SFMono-Regular",Consolas,monospace;
   font-variant-numeric:tabular-nums;
   letter-spacing:.03em;
 }
 #footprint #card-region-shape {
   right:-4px;
   top:-4px;
-  width:74px;
-  height:58px;
-  opacity:.52;
-  fill:rgba(200, 171, 131, 0.05);
-  stroke:rgba(208, 184, 150, 0.32);
-  stroke-width:.75;
+  width:88px;
+  height:68px;
+  opacity:.56;
+  fill:rgba(208, 178, 132, 0.06);
+  stroke:rgba(214, 188, 150, 0.36);
+  stroke-width:.8;
   filter:none;
 }
 #footprint .photo-empty,
 #footprint .photo-empty[data-cover=""] {
-  height:96px;
-  border-radius:4px;
-  border:1px solid rgba(230, 222, 210, 0.09);
+  height:126px;
+  border-radius:5px;
+  border:1px solid rgba(230, 222, 210, 0.1);
   background:
-    radial-gradient(ellipse at 50% 0%, rgba(208, 178, 132, 0.04), transparent 70%),
+    radial-gradient(ellipse at 50% 0%, rgba(208, 178, 132, 0.05), transparent 70%),
     linear-gradient(180deg, rgba(11, 12, 14, 0.72), rgba(7, 8, 10, 0.88));
   box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.5);
-  gap:5px;
+  gap:6px;
 }
 #footprint .photo-empty[data-cover=""]::before {
   display:none !important;
 }
 #footprint .photo-empty svg,
 #footprint .photo-empty[data-cover=""] svg {
-  width:22px;
-  height:19px;
-  stroke:rgba(200, 186, 166, 0.45);
-  stroke-width:1.1;
+  width:26px;
+  height:22px;
+  stroke:rgba(206, 190, 168, 0.48);
+  stroke-width:1.15;
   filter:none;
   opacity:1;
 }
 #footprint .photo-empty>span,
 #footprint .photo-empty[data-cover=""]>span {
-  font-size:12px;
-  color:#c2bbb0;
+  font-size:13px;
+  color:#c8c1b6;
   text-shadow:none;
   letter-spacing:.08em;
 }
 #footprint .photo-empty[data-cover=""]::after {
-  font-size:11px;
-  color:#78726a;
+  font-size:11.5px;
+  color:#7e7870;
   letter-spacing:.04em;
 }
 #footprint .visit-stats {
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:0;
-  margin:14px 0 12px;
-  padding:12px 0 4px;
-  border-top:1px solid rgba(230, 222, 210, 0.09);
+  margin:16px 0 14px;
+  padding:14px 0 4px;
+  border-top:1px solid rgba(230, 222, 210, 0.1);
 }
 #footprint .visit-stats>div {
   display:flex;
   flex-direction:column;
   justify-content:flex-start;
-  padding:0 10px 0 2px;
+  padding:0 12px 0 2px;
   background:none;
   border:0;
   border-radius:0;
   box-shadow:none;
 }
 #footprint .visit-stats div+div {
-  padding-left:15px;
-  border-left:1px solid rgba(230, 222, 210, 0.09);
+  padding-left:16px;
+  border-left:1px solid rgba(230, 222, 210, 0.1);
 }
 #footprint .visit-stats dt {
-  color:#8f8a82;
-  font-size:11.5px;
-  gap:6px;
+  color:#969087;
+  font-size:12px;
+  gap:7px;
   letter-spacing:.06em;
 }
 #footprint .visit-stats dt svg {
-  width:14px;
-  height:15px;
-  stroke:#9e9589;
+  width:15px;
+  height:16px;
+  stroke:#b0a392;
 }
 #footprint .visit-stats>div:first-child svg {
-  fill:#9e9589;
+  fill:#b0a392;
   stroke:none;
 }
 #footprint .visit-stats dd {
-  margin:7px 0 0 0;
-  color:#eeeae4;
-  font:500 21px/1.1 Georgia,"Noto Serif SC",serif;
+  margin:8px 0 0 0;
+  color:#f2eee8;
+  font:500 23px/1.1 Georgia,"Noto Serif SC",serif;
   font-variant-numeric:tabular-nums;
-  min-height:22px;
+  min-height:24px;
   letter-spacing:.02em;
 }
 #footprint .visit-stats dd.visit-date {
-  margin-top:8px;
-  font:400 12px/1.4 ui-monospace,"SFMono-Regular",Consolas,monospace;
-  color:#d8d2c9;
+  margin-top:9px;
+  font:400 12.5px/1.4 ui-monospace,"SFMono-Regular",Consolas,monospace;
+  color:#ddd7ce;
   letter-spacing:0;
 }
 #footprint .location-note {
-  padding:11px 0 0;
-  border-top:1px solid rgba(230, 222, 210, 0.09);
-  font-size:11.5px;
-  color:#969087;
-  gap:6px;
+  padding:12px 0 0;
+  border-top:1px solid rgba(230, 222, 210, 0.1);
+  font-size:12px;
+  color:#9e988f;
+  gap:7px;
   letter-spacing:.04em;
 }
 #footprint .location-icon {
-  font-size:15px;
-  color:#c8ab83;
+  font-size:16px;
+  color:#d8b888;
 }
 #footprint .connector-end {
-  fill:#eeeae4;
-  stroke:#c8ab83;
-  stroke-width:1.2;
+  fill:#f4efe6;
+  stroke:#d8b888;
+  stroke-width:1.3;
   pointer-events:none;
 }
+#footprint .lit-land {
+  stroke:#ffe3a8;
+  stroke-width:1.15;
+}
+#footprint .visited-land {
+  stroke:#f0c980;
+  stroke-width:1;
+}
 #footprint[data-earth-textured="true"] .lit-land {
-  fill-opacity:.64;
-  stroke:#a8dcff;
-  stroke-width:1.2;
+  fill-opacity:.72;
+  stroke:#ffe6b3;
+  stroke-width:1.25;
 }
 #footprint[data-earth-textured="true"] .visited-land {
-  fill-opacity:.62;
-  stroke:#8cc8f5;
-  stroke-width:1;
+  fill-opacity:.68;
+  stroke:#f2cc85;
+  stroke-width:1.08;
+}
+#footprint .hover-land.lit-hover {
+  fill:rgba(246, 206, 130, 0.28);
+  stroke:#ffecb8;
+}
+#footprint .selected-land {
+  fill:rgba(242, 198, 122, 0.22);
+  stroke:#ffe8ad;
+  stroke-width:1.4;
 }
 #footprint[data-earth-textured="true"] .province {
   stroke:#bad6ee;
@@ -1117,35 +1139,80 @@
   stroke-dasharray:2 3;
 }
 #footprint .map-marker {
-  fill:#f2faff;
-  stroke:#8fd0ff;
+  fill:#fff8eb;
+  stroke:#e6be7e;
   stroke-width:1.5;
   filter:url(#point-glow);
 }
 #footprint .marker-ring {
-  stroke:#a8dcff;
+  stroke:#e8c384;
   stroke-width:1.15;
   stroke-dasharray:4 2.5;
 }
 #footprint .connector {
   fill:none;
-  stroke:#9ed4ff;
+  stroke:#e4c492;
   stroke:url(#connector-gradient);
   stroke-width:1.35;
   opacity:.95;
+}
+#footprint .signal-dot {
+  background:#eab968;
+  box-shadow:0 0 9px rgba(242, 192, 108, 0.78);
+}
+#footprint .map-actions button {
+  height:44px;
+  padding:9px 16px;
+  border:1px solid rgba(235, 226, 212, 0.16);
+  border-radius:6px;
+  background:linear-gradient(165deg, rgba(20, 20, 24, 0.86), rgba(11, 12, 15, 0.92));
+  box-shadow:inset 0 1px 0 rgba(245, 236, 222, 0.12), 0 6px 20px rgba(0, 0, 0, 0.45);
+  color:#e6e1d8;
+  font-size:13.5px;
+  letter-spacing:.04em;
+  transition:background 150ms ease, border-color 150ms ease, box-shadow 150ms ease, color 150ms ease;
+}
+#footprint .map-actions button svg {
+  stroke:#d4b483;
+}
+#footprint .map-actions button:hover {
+  border-color:rgba(208, 178, 132, 0.52);
+  background:linear-gradient(165deg, rgba(28, 27, 31, 0.92), rgba(16, 16, 20, 0.96));
+  box-shadow:inset 0 1px 0 rgba(248, 238, 220, 0.22), 0 0 16px rgba(208, 178, 132, 0.16);
+  color:#f6f2eb;
+}
+#footprint .map-actions button:hover svg {
+  stroke:#e8ca9c;
+}
+#footprint .locator {
+  border-radius:7px;
+  border:1px solid rgba(235, 226, 212, 0.16);
+  background:linear-gradient(165deg, rgba(19, 19, 23, 0.94), rgba(11, 12, 15, 0.97));
+  box-shadow:inset 0 1px 0 rgba(245, 236, 222, 0.12), 0 16px 40px rgba(0, 0, 0, 0.65);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
+#footprint .locator label,
+#footprint .locator p {
+  color:#a8a298;
+}
+#footprint .locator select {
+  background:#141519;
+  border:1px solid rgba(224, 212, 194, 0.24);
+  color:#eeeae4;
 }
 #footprint .region-label {
   display:inline-flex;
   align-items:center;
   gap:8px;
   padding:6px 12px;
-  border-radius:6px;
-  background:linear-gradient(145deg,rgba(14, 28, 45, 0.76),rgba(8, 16, 27, 0.86));
-  border:1px solid rgba(135, 188, 235, 0.38);
-  box-shadow:inset 0 1px 0 rgba(205, 234, 255, 0.16),0 8px 24px rgba(1, 6, 14, 0.5);
+  border-radius:5px;
+  background:linear-gradient(160deg, rgba(20, 20, 24, 0.88), rgba(11, 12, 15, 0.94));
+  border:1px solid rgba(235, 226, 212, 0.2);
+  box-shadow:inset 0 1px 0 rgba(245, 236, 222, 0.14), 0 8px 24px rgba(0, 0, 0, 0.55);
   backdrop-filter:blur(12px);
   -webkit-backdrop-filter:blur(12px);
-  color:#edf5fc;
+  color:#f2eee8;
   font-size:12.5px;
   letter-spacing:.06em;
 }
@@ -1155,21 +1222,30 @@
   width:6px;
   height:6px;
   border-radius:50%;
-  background:rgba(154, 182, 206, 0.55);
+  background:rgba(168, 162, 152, 0.55);
   flex:none;
 }
 #footprint .region-label[data-visited="true"]::before {
-  background:#8ad0ff;
-  box-shadow:0 0 8px rgba(110, 195, 255, 0.85);
+  background:#f0c372;
+  box-shadow:0 0 8px rgba(242, 196, 112, 0.85);
 }
 #footprint .footprint-legend {
   bottom:72px;
-  border-radius:7px;
-  border-color:rgba(90, 138, 178, 0.36);
-  background:linear-gradient(145deg,rgba(14, 30, 48, 0.72),rgba(8, 16, 26, 0.82));
-  box-shadow:inset 0 1px 0 rgba(185, 220, 255, 0.12),0 8px 20px rgba(0, 0, 0, 0.35);
+  border-radius:6px;
+  border:1px solid rgba(235, 226, 212, 0.15);
+  background:linear-gradient(165deg, rgba(19, 19, 23, 0.84), rgba(11, 12, 15, 0.92));
+  box-shadow:inset 0 1px 0 rgba(245, 236, 222, 0.1), 0 8px 20px rgba(0, 0, 0, 0.45);
+  color:#ddd7ce;
   backdrop-filter:blur(10px);
   -webkit-backdrop-filter:blur(10px);
+}
+#footprint .legend-dot {
+  background:#f0c372;
+  box-shadow:0 0 0 3px rgba(232, 182, 96, 0.25), 0 0 12px rgba(242, 196, 112, 0.65);
+}
+#footprint .footprint-legend strong {
+  border-left-color:rgba(235, 226, 212, 0.16);
+  color:#f5f0e8;
 }
 #footprint .source-notes {
   bottom:22px;
@@ -1180,44 +1256,49 @@
   align-items:center;
   padding:7px 13px;
   border-radius:6px;
-  border:1px solid rgba(90, 134, 172, 0.32);
-  background:rgba(11, 23, 36, 0.68);
-  box-shadow:inset 0 1px 0 rgba(180, 215, 255, 0.1),0 4px 14px rgba(0, 0, 0, 0.3);
+  border:1px solid rgba(235, 226, 212, 0.14);
+  background:linear-gradient(165deg, rgba(18, 18, 22, 0.8), rgba(10, 11, 14, 0.88));
+  box-shadow:inset 0 1px 0 rgba(245, 236, 222, 0.08), 0 4px 14px rgba(0, 0, 0, 0.38);
   backdrop-filter:blur(10px);
   -webkit-backdrop-filter:blur(10px);
-  color:#b6cce0;
+  color:#b8b2a8;
   font-size:12px;
   letter-spacing:.05em;
   transition:border-color 150ms ease,color 150ms ease,background 150ms ease;
 }
 #footprint .source-notes summary:hover {
-  border-color:rgba(140, 195, 255, 0.68);
-  background:rgba(18, 36, 56, 0.84);
-  color:#eaf4ff;
+  border-color:rgba(208, 178, 132, 0.48);
+  background:rgba(26, 25, 30, 0.92);
+  color:#f2eee8;
 }
 #footprint .source-content {
   bottom:42px;
-  border-radius:8px;
-  border-color:rgba(105, 150, 188, 0.38);
-  background:linear-gradient(155deg,rgba(13, 26, 42, 0.88),rgba(7, 15, 25, 0.94));
-  box-shadow:inset 0 1px 0 rgba(190, 225, 255, 0.14),0 18px 44px rgba(0, 0, 0, 0.65);
+  border-radius:7px;
+  border:1px solid rgba(235, 226, 212, 0.16);
+  background:linear-gradient(165deg, rgba(18, 18, 22, 0.95), rgba(10, 11, 14, 0.98));
+  box-shadow:inset 0 1px 0 rgba(245, 236, 222, 0.12), 0 18px 44px rgba(0, 0, 0, 0.7);
+  color:#b8b2a8;
   backdrop-filter:blur(16px);
   -webkit-backdrop-filter:blur(16px);
 }
+#footprint .source-content a {
+  color:#d8b888;
+}
 @container footprint (max-width:1100px) {
   #footprint .visit-card {
-    width:min(320px, calc(100% - 36px));
-    padding:16px 16px 13px;
+    width:min(348px, calc(100% - 36px));
+    padding:18px 20px 15px;
   }
 }
 @container footprint (max-width:520px) {
   #footprint .visit-card {
-    width:min(300px, calc(100% - 32px));
-    padding:15px 15px 12px;
+    width:min(316px, calc(100% - 32px));
+    padding:16px 16px 13px;
   }
   #footprint .card-heading-copy { padding-right:64px; }
   #footprint #card-region-shape { width:72px; height:56px; }
-  #footprint .photo-empty { height:104px; }
+  #footprint .photo-empty,
+  #footprint .photo-empty[data-cover=""] { height:108px; }
   #footprint .source-notes { left:16px; bottom:14px; }
   #footprint .source-notes summary { padding:5px 10px; font-size:11px; }
 }

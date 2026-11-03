@@ -189,9 +189,9 @@ export function mountFootprint(container, assetBase) {
       .append("linearGradient")
       .attr("id", "connector-gradient")
       .attr("gradientUnits", "userSpaceOnUse");
-    connectorGrad.append("stop").attr("offset", "0%").attr("stop-color", "rgba(185, 222, 252, 0.92)");
-    connectorGrad.append("stop").attr("offset", "55%").attr("stop-color", "rgba(205, 214, 224, 0.68)");
-    connectorGrad.append("stop").attr("offset", "100%").attr("stop-color", "rgba(218, 204, 184, 0.55)");
+    connectorGrad.append("stop").attr("offset", "0%").attr("stop-color", "rgba(246, 214, 152, 0.95)");
+    connectorGrad.append("stop").attr("offset", "55%").attr("stop-color", "rgba(224, 196, 152, 0.68)");
+    connectorGrad.append("stop").attr("offset", "100%").attr("stop-color", "rgba(218, 204, 184, 0.52)");
     const limbFade = defs
       .append("radialGradient")
       .attr("id", "globe-limb-fade")
@@ -397,7 +397,6 @@ export function mountFootprint(container, assetBase) {
     let projectedPaths = new Map();
     let announceTimer = 0;
     let measuredCardHeight=0;
-    const homePoint = home.properties.center;
     probe.font = "13px Microsoft YaHei";
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
@@ -487,34 +486,14 @@ export function mountFootprint(container, assetBase) {
         hoverAnimation?.cancel(); lastHoverId = nextHoverId;
         if(nextHoverId && !reducedMotion.matches) hoverAnimation = hoverPath.node().animate([{opacity:.25},{opacity:1}],{duration:150,easing:'ease-out'});
       }
-      const homeVisible = visible(homePoint),
-        hp = projection(homePoint);
+      const selectedVisible = selected && !drag && visible(selected.properties.center),
+        sp = selectedVisible ? projection(selected.properties.center) : null;
       homeLabel
-        .attr("display", homeVisible && hovered !== home ? null : "none")
-        .attr("x", hp[0])
-        .attr("y", hp[1] + 23);
-      const placed = [];
-      if (homeVisible)
-        placed.push({ x: hp[0] - 35, y: hp[1] + 10, w: 70, h: 20 });
-      visitLabels.each(function (f) {
-        const text = d3.select(this),
-          p = projection(f.properties.center),
-          w = probe.measureText(displayName(f)).width + 18,
-          rect = { x: p[0] - w / 2, y: p[1] + 12, w, h: 20 };
-        const overlap = placed.some(
-          (r) =>
-            rect.x < r.x + r.w &&
-            rect.x + rect.w > r.x &&
-            rect.y < r.y + r.h &&
-            rect.y + rect.h > r.y,
-        );
-        const show = visible(f.properties.center) && !overlap;
-        text
-          .attr("display", show ? null : "none")
-          .attr("x", p[0])
-          .attr("y", p[1] + 24);
-        if (show) placed.push(rect);
-      });
+        .text(selected ? displayName(selected) : home.properties.nameZh)
+        .attr("display", selectedVisible ? null : "none")
+        .attr("x", sp ? sp[0] : 0)
+        .attr("y", sp ? sp[1] + 24 : 0);
+      visitLabels.attr("display", "none");
       const summary = feature ? summaries.get(feature.properties.id) || (feature === selected ? {
         regionId:feature.properties.id,name:displayName(feature),residence:false,count:0,latest:null,
         location:{coordinate:feature.properties.center,level:'地区中心 · 尚无公开到访'},cover:{src:null},unvisited:true,
@@ -599,7 +578,9 @@ export function mountFootprint(container, assetBase) {
         }
         const cardWidth = card.offsetWidth,
           cardHeight = card.offsetHeight;
-        const {left,top,side,vertical}=footprintCard({width,height,cx,cy,radius,mobile},cardWidth,cardHeight,position);
+        const rawLayout=footprintCard({width,height,cx,cy,radius,mobile},cardWidth,cardHeight,position);
+        const left = mobile ? rawLayout.left : Math.max(Math.round(cx + radius * 1.045 + 24), rawLayout.left - 28);
+        const {top,side,vertical}=rawLayout;
         card.dataset.side=side;card.dataset.vertical=vertical;
         card.style.left = left + "px";
         card.style.top = top + "px";
@@ -625,7 +606,7 @@ export function mountFootprint(container, assetBase) {
       if(detailChanged) revealDetail(firstReveal);
       const measured=card.hidden?0:card.offsetHeight;
       if(measured!==measuredCardHeight){measuredCardHeight=measured;resize();}
-      const showName = hovered && !drag;
+      const showName = hovered && !drag && hovered !== selected;
       hoverLabel.hidden = !showName;
       if (showName) {
         const p = pointOnFeature(hovered);

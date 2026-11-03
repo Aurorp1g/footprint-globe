@@ -1232,20 +1232,20 @@
 #footprint .footprint-legend {
   bottom:72px;
   border-radius:6px;
-  border:1px solid rgba(235, 226, 212, 0.15);
-  background:linear-gradient(165deg, rgba(19, 19, 23, 0.84), rgba(11, 12, 15, 0.92));
-  box-shadow:inset 0 1px 0 rgba(245, 236, 222, 0.1), 0 8px 20px rgba(0, 0, 0, 0.45);
-  color:#ddd7ce;
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(235, 226, 212, 0.16);
+  background:linear-gradient(165deg, rgba(20, 20, 24, 0.88), rgba(11, 12, 15, 0.94));
+  box-shadow:inset 0 1px 0 rgba(245, 236, 222, 0.12), 0 8px 20px rgba(0, 0, 0, 0.48);
+  color:#e6e1d8;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
 }
 #footprint .legend-dot {
-  background:#f0c372;
-  box-shadow:0 0 0 3px rgba(232, 182, 96, 0.25), 0 0 12px rgba(242, 196, 112, 0.65);
+  background:#eab968;
+  box-shadow:0 0 0 3px rgba(216, 172, 96, 0.22), 0 0 12px rgba(238, 190, 108, 0.68);
 }
 #footprint .footprint-legend strong {
-  border-left-color:rgba(235, 226, 212, 0.16);
-  color:#f5f0e8;
+  border-left:1px solid rgba(216, 184, 136, 0.28);
+  color:#f2dec0;
 }
 #footprint .source-notes {
   bottom:22px;
@@ -1254,22 +1254,27 @@
 #footprint .source-notes summary {
   display:inline-flex;
   align-items:center;
-  padding:7px 13px;
+  padding:8px 14px;
   border-radius:6px;
-  border:1px solid rgba(235, 226, 212, 0.14);
-  background:linear-gradient(165deg, rgba(18, 18, 22, 0.8), rgba(10, 11, 14, 0.88));
-  box-shadow:inset 0 1px 0 rgba(245, 236, 222, 0.08), 0 4px 14px rgba(0, 0, 0, 0.38);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  color:#b8b2a8;
-  font-size:12px;
+  border:1px solid rgba(235, 226, 212, 0.16);
+  background:linear-gradient(165deg, rgba(20, 20, 24, 0.86), rgba(11, 12, 15, 0.92));
+  box-shadow:inset 0 1px 0 rgba(245, 236, 222, 0.1), 0 6px 18px rgba(0, 0, 0, 0.45);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  color:#dfd9cf;
+  font-size:12.5px;
   letter-spacing:.05em;
-  transition:border-color 150ms ease,color 150ms ease,background 150ms ease;
+  transition:border-color 150ms ease,color 150ms ease,background 150ms ease,box-shadow 150ms ease;
+}
+#footprint .source-notes summary::before {
+  color:#d4b483;
+  font-size:13px;
 }
 #footprint .source-notes summary:hover {
-  border-color:rgba(208, 178, 132, 0.48);
-  background:rgba(26, 25, 30, 0.92);
-  color:#f2eee8;
+  border-color:rgba(208, 178, 132, 0.52);
+  background:linear-gradient(165deg, rgba(28, 27, 31, 0.92), rgba(16, 16, 20, 0.96));
+  box-shadow:inset 0 1px 0 rgba(248, 238, 220, 0.2), 0 0 14px rgba(208, 178, 132, 0.14);
+  color:#f6f2eb;
 }
 #footprint .source-content {
   bottom:42px;

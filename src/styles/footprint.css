@@ -1,0 +1,1225 @@
+/*!
+ * Footprint Globe Stylesheet (Basalt Ink & Champagne Gold Editorial Edition)
+ * Copyright (c) 2026 曾威长/Over9rowth. Released under the MIT License.
+ */
+/* One immersive charcoal space and cool-blue globe, independent of site preference. */
+#footprint {
+  color-scheme: dark;
+  --fp-space: #101112;
+  --fp-space-center: #191c21;
+  --fp-space-mid: #121519;
+  --fp-space-edge: #101112;
+  --fp-text: #e4ecf3;
+  --fp-subtle: #adbdca;
+  --fp-muted: #9dafc0;
+  --fp-accent: #98c2df;
+  --fp-hover: #b7d6ea;
+  --fp-card-start: #1a2b3e;
+  --fp-card-end: #111e2d;
+  --fp-panel: #142233;
+  --fp-control: #17283a;
+  --fp-control-hover: #22384e;
+  --fp-control-active: #2d4760;
+  --fp-line: #42596d;
+  --fp-line-soft: #2d4357;
+  --fp-line-strong: #64849f;
+  --fp-shadow: rgba(1, 5, 11, 0.28);
+  --fp-shadow-soft: rgba(1, 5, 11, 0.14);
+  --fp-nebula: rgba(102, 139, 172, 0.045);
+  --fp-land-outline: #b4c7d6;
+  --fp-country-outline: #d4e2ed;
+  --fp-grid: #6c8ba6;
+  --fp-maritime: #b5ccdd;
+  --fp-hover-fill: rgba(112, 187, 244, 0.26);
+  --fp-lit-hover-fill: rgba(151, 212, 255, 0.30);
+  --fp-label: #deecf6;
+  --fp-label-halo: #0d1b2a;
+  --fp-connector: #9bb6cc;
+  --fp-marker: #eef8ff;
+  --fp-marker-outline: #9ac5e4;
+  --fp-ring: #82accb;
+  --fp-sphere-outline: #7198b6;
+  --fp-photo-start: #21364a;
+  --fp-photo-end: #17283a;
+  --fp-icon: #8ba7bc;
+  --fp-ocean-start: #172a3f;
+  --fp-ocean-mid: #0e1d2d;
+  --fp-ocean-end: #07111e;
+  --fp-land-start: #a0b4c5;
+  --fp-land-mid: #718ba2;
+  --fp-land-end: #4c657c;
+  --fp-lit-start: #99c6e6;
+  --fp-lit-end: #4e85ae;
+  --fp-atmosphere: #6b99bf;
+  --fp-atmosphere-opacity: .12;
+  --fp-globe-shadow: #020711;
+  --fp-star: #a8bdce;
+  --fp-glow: #80b2d6;
+}
+
+#footprint,
+#footprint * {
+  box-sizing: border-box;
+}
+#footprint {
+  color: var(--text);
+  font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+}
+#footprint button,
+#footprint select {
+  font: inherit;
+}
+#footprint button {
+  cursor: pointer;
+}
+#footprint button:focus-visible,
+#footprint select:focus-visible,
+#footprint summary:focus-visible,
+#globe:focus-visible {
+  outline: 2px solid var(--fp-accent);
+  outline-offset: 5px;
+}
+#footprint button svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+#footprint button {
+  color: var(--fp-subtle);
+  background: var(--fp-control);
+  border: 1px solid var(--fp-line);
+  border-radius: 4px;
+  padding: 9px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    background 0.2s;
+}
+#footprint button:hover {
+  color: var(--fp-text);
+  background: var(--fp-control-hover);
+  border-color: var(--fp-line-strong);
+}
+#footprint button:active {
+  background: var(--fp-control-active);
+}
+#footprint {
+  position: relative;
+  width: 100%;
+  min-height: 600px;
+  isolation: isolate;
+  overflow: hidden;
+  background: radial-gradient(
+    ellipse at 38% 48%,
+    var(--fp-space-center) 0,
+    var(--fp-space-mid) 47%,
+    var(--fp-space-edge) 100%
+  );
+}
+#starfield {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  pointer-events: none;
+}
+#footprint .nebula {
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 17% 43%, var(--fp-nebula), transparent 20%),
+    radial-gradient(ellipse at 78% 74%, var(--fp-nebula), transparent 21%);
+  transform: rotate(-24deg);
+}
+#globe {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  outline: none;
+}
+#globe.dragging {
+  cursor: grabbing;
+}
+#globe path {
+  vector-effect: non-scaling-stroke;
+}
+#footprint .map-land {
+  fill: url(#land-fill);
+  stroke: var(--fp-land-outline);
+  stroke-width: 0.48;
+  stroke-linejoin: round;
+}
+#footprint .province {
+  fill: url(#land-fill);
+  stroke: none;
+}
+#footprint .country-china {
+  fill: none;
+  stroke: var(--fp-country-outline);
+  stroke-width: 0.9;
+  stroke-linejoin: round;
+}
+#footprint .ocean-grid {
+  fill: none;
+  stroke: var(--fp-grid);
+  stroke-opacity: 0.33;
+  stroke-width: 0.5;
+}
+#footprint .maritime-line {
+  fill: none;
+  stroke: var(--fp-maritime);
+  stroke-opacity: 0.85;
+  stroke-width: 0.9;
+  stroke-dasharray: 6 6;
+  stroke-linecap: round;
+}
+#footprint .lit-land {
+  fill: url(#guangdong-fill);
+  stroke: var(--fp-accent);
+  stroke-width: 1;
+  filter: none;
+}
+/* A local hover wash is feedback, never a published-visit marker. */
+#footprint .hover-land {
+  fill: var(--fp-hover-fill);
+  stroke: #c0e7ff;
+  stroke-width: 1.65;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 3px rgba(111, 190, 247, .6));
+  pointer-events: none;
+}
+#footprint #globe:has(.hover-land:not([display="none"])) { cursor: pointer; }
+#footprint .hover-land.lit-hover {
+  fill: var(--fp-lit-hover-fill);
+}
+#footprint .constant-label {
+  fill: var(--fp-label);
+  font-size: 13px;
+  letter-spacing: 1px;
+  paint-order: stroke;
+  stroke: var(--fp-label-halo);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+#footprint .connector {
+  fill: none;
+  stroke: var(--fp-connector);
+  stroke-width: 0.8;
+  opacity: 0.76;
+  pointer-events: none;
+}
+#footprint .map-marker {
+  fill: var(--fp-marker);
+  stroke: var(--fp-marker-outline);
+  stroke-width: 1.3;
+  filter: none;
+  pointer-events: none;
+}
+#footprint .marker-ring {
+  fill: none;
+  stroke: var(--fp-ring);
+  stroke-width: 0.7;
+  opacity: 0.5;
+  pointer-events: none;
+}
+#footprint .sphere-outline {
+  fill: none;
+  stroke: var(--fp-sphere-outline);
+  stroke-width: 1.1;
+  opacity: 0.64;
+  pointer-events: none;
+}
+#footprint .quiet-heading {
+  position: absolute;
+  left: 34px;
+  top: 30px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--fp-subtle);
+  pointer-events: none;
+}
+#footprint .signal-dot {
+  width: 4px;
+  height: 4px;
+  background: var(--fp-accent);
+  border-radius: 50%;
+  box-shadow: none;
+}
+#footprint .map-actions {
+  position: absolute;
+  right: 30px;
+  top: 23px;
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+}
+#footprint .locator {
+  position: absolute;
+  right: 30px;
+  top: 73px;
+  width: 275px;
+  z-index: 8;
+  padding: 17px;
+  background: var(--fp-panel);
+  border: 1px solid var(--fp-line);
+  box-shadow: 0 8px 24px var(--fp-shadow);
+  border-radius: 4px;
+}
+#footprint .locator label {
+  display: block;
+  font-size: 12px;
+  color: var(--fp-subtle);
+  margin-bottom: 10px;
+}
+#footprint .locator select {
+  width: 100%;
+  height: 37px;
+  color: var(--fp-text);
+  background: var(--fp-control);
+  border: 1px solid var(--fp-line-strong);
+  border-radius: 4px;
+  padding: 0 8px;
+}
+#footprint .locator p {
+  font-size: 11px;
+  color: var(--fp-subtle);
+  margin: 10px 0 0;
+  line-height: 1.6;
+}
+#footprint .visit-card {
+  position: absolute;
+  width: 268px;
+  padding: 20px 20px 0;
+  border: 1px solid var(--fp-line);
+  border-radius: 4px;
+  background: linear-gradient(
+    145deg,
+    var(--fp-card-start),
+    var(--fp-card-end)
+  );
+  box-shadow: 0 8px 24px var(--fp-shadow);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  pointer-events: none;
+  transition: opacity 0.15s;
+}
+#footprint .visit-card[hidden] {
+  display: none;
+}
+#footprint .card-heading {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin: 0 0 17px;
+}
+#footprint .card-heading h1 {
+  font-size: 21px;
+  letter-spacing: 2px;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.2;
+}
+#footprint .card-heading span {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--fp-subtle);
+}
+#footprint .photo-empty {
+  height: 133px;
+  border: 1px solid var(--fp-line-soft);
+  border-radius: 2px;
+  background: radial-gradient(
+    ellipse at 50% 20%,
+    var(--fp-photo-start),
+    var(--fp-photo-end)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  color: var(--fp-subtle);
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+#footprint .photo-empty svg {
+  width: 44px;
+  height: 38px;
+  fill: none;
+  stroke: var(--fp-icon);
+  stroke-width: 1.1;
+}
+#footprint .visit-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 20px 0 19px;
+}
+#footprint .visit-stats div + div {
+  padding-left: 28px;
+  border-left: 1px solid var(--fp-line);
+}
+#footprint .visit-stats dt {
+  font-size: 11px;
+  color: var(--fp-subtle);
+  letter-spacing: 1px;
+}
+#footprint .visit-stats dd {
+  margin: 8px 0 0;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--fp-text);
+  font-variant-numeric: tabular-nums;
+}
+#footprint .location-note {
+  border-top: 1px solid var(--fp-line-soft);
+  margin: 0 -20px;
+  padding: 10px 18px;
+  font-size: 11px;
+  color: var(--fp-subtle);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+#footprint .location-icon {
+  font-size: 17px;
+  line-height: 13px;
+}
+#footprint .region-label {
+  position: absolute;
+  pointer-events: none;
+  padding: 8px 12px;
+  background: var(--fp-panel);
+  border: 1px solid var(--fp-line-strong);
+  border-radius: 4px;
+  color: var(--fp-text);
+  font-size: 13px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px var(--fp-shadow);
+  z-index: 5;
+}
+#footprint .bottom-hint {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--fp-subtle);
+  pointer-events: none;
+}
+#footprint .drag-icon {
+  font-size: 17px;
+  color: var(--fp-icon);
+}
+#footprint .source-notes {
+  position: absolute;
+  bottom: 23px;
+  left: 30px;
+  z-index: 9;
+  max-width: 330px;
+  color: var(--fp-subtle);
+  font-size: 11px;
+}
+#footprint .source-notes summary {
+  cursor: pointer;
+  list-style: none;
+  letter-spacing: 1px;
+}
+#footprint .source-notes summary::before {
+  content: "ⓘ";
+  margin-right: 6px;
+}
+#footprint .source-content {
+  position: absolute;
+  bottom: 29px;
+  left: 0;
+  padding: 14px 17px;
+  width: 330px;
+  max-height: 55svh;
+  overflow: auto;
+  background: var(--fp-panel);
+  border: 1px solid var(--fp-line);
+  border-radius: 4px;
+  box-shadow: 0 8px 24px var(--fp-shadow);
+  line-height: 1.75;
+  color: var(--fp-subtle);
+}
+#footprint .source-content p {
+  margin: 0 0 10px;
+}
+#footprint .source-content p:last-child {
+  margin-bottom: 0;
+}
+#footprint .source-content a {
+  color: var(--fp-accent);
+  text-underline-offset: 3px;
+  display: block;
+  margin: 4px 0;
+}
+#footprint .source-content #data-notes {
+  font-size: 10px;
+  color: var(--fp-subtle);
+  margin-top: 10px;
+}
+#loading-state {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  color: var(--fp-subtle);
+  letter-spacing: 3px;
+  background: var(--fp-space);
+  z-index: 10;
+}
+#loading-state[hidden] {
+  display: none;
+}
+#footprint .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+@container footprint (max-width:899px) {
+  #footprint .quiet-heading {
+    left: 20px;
+    top: 24px;
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+  #footprint .map-actions {
+    right: 16px;
+    top: 16px;
+    gap: 5px;
+  }
+  #footprint .map-actions button {
+    font-size: 11px;
+    padding: 7px 8px;
+    gap: 4px;
+  }
+  #footprint .map-actions button svg {
+    width: 14px;
+    height: 14px;
+  }
+  #footprint .locator {
+    right: 16px;
+    top: 58px;
+    width: min(275px, calc(100vw - 32px));
+  }
+  #footprint .visit-card {
+    width: 250px;
+    padding: 17px 17px 0;
+    left: 50% !important;
+    transform: translateX(-50%);
+  }
+  #footprint .card-heading {
+    margin-bottom: 13px;
+  }
+  #footprint .card-heading h1 {
+    font-size: 19px;
+  }
+  #footprint .photo-empty {
+    height: 108px;
+  }
+  #footprint .visit-stats {
+    margin: 16px 0;
+  }
+  #footprint .location-note {
+    margin: 0 -17px;
+    padding: 9px 16px;
+  }
+  #footprint .source-notes {
+    left: 18px;
+    bottom: 18px;
+    font-size: 10px;
+  }
+  #footprint .source-content {
+    width: min(330px, calc(100vw - 36px));
+  }
+  #footprint .bottom-hint {
+    bottom: 46px;
+    font-size: 10px;
+  }
+  #footprint .constant-label {
+    font-size: 12px;
+  }
+  #footprint .region-label {
+    font-size: 12px;
+  }
+  #footprint .card-heading span {
+    font-size: 10px;
+  }
+}
+@container footprint (max-width:520px) {
+  #footprint .quiet-heading {
+    top: 66px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+  #footprint .map-actions {
+    top: 18px;
+    left: 0;
+    right: 0;
+    justify-content: center;
+  }
+  #footprint .map-actions button {
+    padding: 7px 12px;
+  }
+  #footprint .locator {
+    top: 60px;
+  }
+  #footprint .visit-card {
+    width: min(242px, calc(100% - 32px));
+  }
+  #footprint .source-notes {
+    bottom: 15px;
+  }
+  #footprint .bottom-hint {
+    bottom: 45px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #footprint * {
+    transition: none !important;
+  }
+}
+
+#footprint {
+  width: 100%;
+  border: 1px solid var(--fp-line);
+  border-radius: 4px;
+}
+#footprint[hidden] {
+  display: none;
+}
+#footprint .visit-card {
+  margin: 0;
+  z-index: 2;
+}
+#footprint .visit-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+#footprint .photo-empty {
+  overflow: hidden;
+}
+#footprint .card-heading h2 {
+  font-size: 20px;
+  margin: 0;
+}
+#footprint button {
+  min-height: 36px;
+}
+#footprint .source-content {
+  max-width: min(350px, calc(100vw - 60px));
+}
+#footprint .about-content:has([data-about-panel="footprints"]:not([hidden])) {
+  min-width: 0;
+}
+#footprint .about-tabs {
+  flex-wrap: wrap;
+}
+#footprint .visit-date {
+  font-size: 13px;
+}
+@container footprint (max-width:560px) {
+  #footprint {
+    border-radius: 4px;
+  }
+  #footprint .quiet-heading {
+    font-size: 10px;
+  }
+}
+
+#footprint {
+  container: footprint / inline-size;
+}
+#footprint .source-notes {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+#footprint .bottom-hint {
+  margin: 0;
+}
+#footprint .location-note {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+#footprint .card-heading h2 {
+  font:
+    500 20px/1.3 "Microsoft YaHei",
+    sans-serif;
+}
+#about-app:has([data-about-panel="footprints"]:not([hidden])) .about-stream {
+  padding: 20px;
+}
+@media (max-width: 560px) {
+  #about-app:has([data-about-panel="footprints"]:not([hidden])) .about-stream {
+    padding: 8px;
+  }
+  .about-tabs a {
+    font-size: 13px;
+  }
+}
+
+#footprint .visit-card {
+  pointer-events: auto;
+  touch-action: pan-y;
+}
+#footprint .visit-stats dd.visit-date {
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+#footprint .visit-stats div + div {
+  padding-left: 14px;
+}
+#footprint .visit-stats > div {
+  min-width: 0;
+}
+#footprint .locator {
+  max-width: calc(100% - 32px);
+}
+#footprint .source-content {
+  max-width: calc(100cqw - 36px);
+}
+.travel-register {
+  border: 1px solid var(--fp-line, var(--line));
+  border-radius: 4px;
+  padding: 14px;
+  margin-top: 20px;
+}
+.travel-register h2 {
+  font-size: 17px;
+}
+.travel-register p {
+  font-size: 13px;
+}
+
+/* Keep a long region name and its status as separate, readable phrases. */
+#footprint .card-heading{flex-wrap:wrap;gap:6px 12px;align-items:baseline}
+#footprint .card-heading span{white-space:nowrap}
+
+/* Non-blocking brand feedback follows the real map fetch and mount. */
+#footprint #footprint-brand-loader{position:absolute;z-index:8;left:50%;top:42%;transform:translate(-50%,-50%)}
+#footprint[data-brand-loading] #loading-state{visibility:hidden}
+
+/* No separate quotation panel or decorative visit beacons are created. */
+#footprint .visit-card{height:auto;min-height:0;padding-bottom:24px}
+#footprint .oy-loader__mark--light{display:none}
+#footprint .oy-loader__mark--dark{display:block}
+#footprint .oy-loader__caption{color:#b9c5d0}
+
+/* Fixed composition: generous globe on the left, quiet blue-black detail on the right. */
+#footprint{--fp-space:#080f18;--fp-space-center:#101d2b;--fp-space-mid:#0b1420;--fp-space-edge:#080f18;--fp-card-start:#102237;--fp-card-end:#091521;--fp-line:#344e67;--fp-line-soft:#263d53;color:var(--fp-text)}
+#footprint .earth-surface{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#footprint[data-earth-textured="true"] #globe path[fill="url(#ocean-fill)"],
+#footprint[data-earth-textured="true"] .map-land,
+#footprint[data-earth-textured="true"] .province{fill:none}
+#footprint[data-earth-textured="true"] .map-land{stroke-opacity:.48;stroke-width:.55}
+#footprint[data-earth-textured="true"] .ocean-grid{stroke-opacity:.18}
+#footprint .quiet-heading{top:14px;left:30px;font-size:13px;letter-spacing:2px;color:rgba(210, 228, 255, 0.72)}
+#footprint .signal-dot{width:5px;height:5px;border-radius:50%;background:#8bd1ff;box-shadow:0 0 8px rgba(100, 186, 255, 0.65)}
+#footprint .map-actions{top:14px;right:32px;gap:10px}
+#footprint .map-actions button{padding:10px 16px;border-color:#446a88;background:#102034b8;border-radius:6px}
+#footprint .locator{top:66px;right:32px}
+#footprint .visit-card{width:clamp(360px,28%,420px);padding:25px 24px 22px;border-radius:10px;border-color:#38516a;background:linear-gradient(150deg,#122439ef,#09131eF5 80%);box-shadow:0 20px 60px #01071066,inset 0 1px #c0ddff0a;transform:none}
+#footprint .card-heading{gap:7px 13px;margin-bottom:21px;align-items:baseline}
+#footprint .card-heading h2{font:500 28px/1.35 "Microsoft YaHei","PingFang SC",sans-serif;letter-spacing:2px;color:#edf4fb}
+#footprint .card-heading span{font-size:12px;color:#a9bfd1;letter-spacing:1px}
+#footprint .photo-empty{height:176px;border-radius:6px;background:linear-gradient(145deg,#1c3044,#102030);border-color:#304960;gap:10px;font-size:13px;color:#b5c8da}
+#footprint .photo-empty svg{width:38px;height:33px;stroke:#9bb8d2}
+#footprint .visit-stats{gap:12px;margin:20px 0}
+#footprint .visit-stats>div{padding:14px 13px 15px;border:1px solid #2b435b;border-radius:7px;background:#101f2e80}
+#footprint .visit-stats div+div{padding-left:13px;border-left:1px solid #2b435b}
+#footprint .visit-stats dt{font-size:12px;letter-spacing:1px}
+#footprint .visit-stats dd{font-size:27px;margin-top:12px;min-height:27px}
+#footprint .visit-stats dd.visit-date{font-size:13px;line-height:1.65}
+#footprint .location-note{margin:0;padding:17px 0 0;border-color:#30465a;font-size:12px;line-height:1.7;gap:9px}
+#footprint .location-icon{font-size:24px;color:#a7cae7}
+#footprint .card-coordinates{margin:6px 0 0 28px;color:#93aec6;font:12px/1.7 system-ui,sans-serif;letter-spacing:.5px;min-height:0}
+#footprint .card-coordinates:empty{display:none}
+#footprint .bottom-hint{left:32%;bottom:24px;color:#9bb1c4;letter-spacing:1px}
+#footprint .source-notes{bottom:24px;color:#8299ad}
+@container footprint (max-width:1100px){
+ #footprint .visit-card{width:min(420px,calc(100% - 40px));left:50%!important;transform:translateX(-50%);padding:22px}
+ #footprint .quiet-heading{left:20px;top:14px;font-size:12px;color:rgba(210, 228, 255, 0.72);letter-spacing:1px}
+ #footprint .map-actions{top:12px;right:20px;left:auto;gap:7px}
+ #footprint .map-actions button{height:36px;padding:6px 12px;font-size:12px}
+ #footprint .locator{top:54px;right:20px}
+ #footprint .photo-empty{height:166px}
+ #footprint .card-heading h2{font-size:26px}
+ #footprint .location-note{margin:0;padding:16px 0 0}
+ #footprint .bottom-hint{left:50%;bottom:52px;font-size:11px}
+ #footprint .source-notes{left:24px;bottom:22px}
+}
+@container footprint (max-width:520px){
+ #footprint .quiet-heading{top:12px;left:16px;transform:none;font-size:12px;letter-spacing:0.05em;color:rgba(210, 228, 255, 0.72);white-space:nowrap;z-index:5}
+ #footprint .map-actions{top:8px;right:16px;left:auto;justify-content:flex-end;gap:6px;z-index:6}
+ #footprint .map-actions button{height:34px;padding:6px 10px;font-size:11px}
+ #footprint .locator{top:48px;right:16px}
+ #footprint .visit-card{width:calc(100% - 40px);max-width:420px}
+ #footprint .photo-empty{height:150px}
+ #footprint .visit-stats{gap:10px}
+}
+@container footprint (max-width:360px){
+ #footprint .quiet-heading{left:10px;font-size:11px}
+ #footprint .map-actions{right:10px;gap:4px}
+ #footprint .map-actions button{padding:5px 7px;font-size:10.5px}
+ #footprint .locator{right:10px}
+}
+#footprint .selected-land{fill:rgba(90,176,242,.2);stroke:#c2e8ff;stroke-width:1.4;stroke-linejoin:round;filter:drop-shadow(0 0 3px #6ebff766);pointer-events:none}
+
+#footprint[data-earth-textured="true"] .province{stroke:#c2daf0;stroke-width:.62;stroke-opacity:.7;stroke-linejoin:round}
+#footprint .sphere-outline{stroke:#8fcfff;stroke-width:1.4;opacity:.85;filter:drop-shadow(0 0 3px #529ded)}
+#footprint .connector{fill:none;stroke:rgba(140, 195, 255, 0.45);stroke:url(#connector-gradient);stroke-width:0.75;opacity:1;pointer-events:none}
+#footprint .visit-card{padding-bottom:24px}
+
+/* Reference refinement: restrained glass, a real region silhouette and legible statistics. */
+#footprint .visit-card{background:radial-gradient(ellipse at 95% 0,#19365375,transparent 45%),linear-gradient(155deg,#0c1c2ded,#070f18f5);border-color:#3c5872;box-shadow:0 18px 60px #0008,inset 0 1px #a2cfff14}
+#footprint .card-heading{position:relative;display:flex;align-items:flex-start;gap:14px;min-height:64px;margin-bottom:20px}
+#footprint .card-pin{width:24px;height:28px;flex:none;margin-top:5px;fill:#badbff;filter:drop-shadow(0 0 8px #5fafff33)}
+#footprint .card-pin circle{fill:#10273e}
+#footprint .card-heading-copy{position:relative;z-index:1;max-width:80%}
+#footprint .card-heading-copy span{display:block;line-height:1.8;margin-top:3px;font-size:14px}
+#footprint #card-region-shape{position:absolute;right:-6px;top:-12px;width:110px;height:90px;opacity:.38;fill:#24435d50;stroke:#8eb5da;stroke-width:.65;filter:drop-shadow(0 0 6px rgba(70, 145, 225, 0.22));pointer-events:none}
+#footprint .photo-empty{position:relative;height:180px;background:radial-gradient(ellipse at 50% -25%,#405e7c8a,transparent 80%),linear-gradient(150deg,#13283c,#0c1928);border-color:#365069;box-shadow:inset 0 1px #a6cefb0a;gap:12px}
+#footprint .photo-empty[data-cover=""]::after{content:"用一张照片，记录这里的风景";font-size:12px;letter-spacing:.5px;color:#8da6bd}
+#footprint .photo-empty svg{width:40px;height:34px;stroke:#a3c8ec}
+#footprint .photo-empty>span{font-size:15px;color:#d2e1ee}
+#footprint .visit-stats dt{display:flex;align-items:center;gap:10px;font-size:14px;color:#c8d8e7}
+#footprint .visit-stats dt svg{width:23px;height:25px;flex:none;fill:none;stroke:#9ac7f2;stroke-width:1.55;stroke-linecap:round;stroke-linejoin:round}
+#footprint .visit-stats>div:first-child svg{fill:#9ac7f2;stroke:none}
+#footprint .visit-stats dd{margin-left:33px}
+#footprint .visit-stats>div{background:linear-gradient(140deg,#132336b0,#0b1827b0);border-color:#2c435b}
+#footprint .location-note{font-size:14px;color:#c6d8e9;gap:12px}
+#footprint .card-coordinates{font-size:13px;margin-left:32px;color:#90aac4}
+#footprint .sphere-outline{stroke:#92bade;stroke-width:.75;opacity:.45;filter:none}
+#footprint .map-actions button{height:46px;padding:10px 16px;border:1px solid #44617a;border-radius:5px;background:rgba(12, 25, 39, 0.85);box-shadow:inset 0 1px 0 rgba(180, 215, 255, 0.15),0 3px 12px rgba(0,0,0,0.35);color:#c6dcef;font-size:14px;box-sizing:border-box;transition:background 150ms ease,border-color 150ms ease,box-shadow 150ms ease,color 150ms ease}
+#footprint .map-actions button:hover{border-color:rgba(140, 195, 255, 0.75);background:rgba(22, 42, 64, 0.9);box-shadow:inset 0 1px 0 rgba(210, 235, 255, 0.28),0 0 16px rgba(60, 140, 220, 0.22);color:#eaf4ff}
+@container footprint (max-width:520px){#footprint .photo-empty{height:150px}#footprint .visit-stats dt{font-size:12px;gap:6px}#footprint .visit-stats dd{margin-left:0}#footprint .location-note{font-size:12px}#footprint .card-coordinates{font-size:12px}}
+
+/* Directional material owns its shading; retain the original SVG shade for fallback. */
+#footprint[data-earth-textured="true"] #globe path[fill="url(#sphere-shade)"]{opacity:.22}
+#footprint[data-earth-textured="true"] .map-land{stroke:#b5cbe0;stroke-opacity:.5;stroke-width:.5}
+#footprint[data-earth-textured="true"] .province{stroke:#bcd5ec;stroke-opacity:.65;stroke-width:.62}
+#footprint[data-earth-textured="true"] .country-china{stroke:#e1efff;stroke-width:1.15}
+#footprint .photo-empty[data-cover=""]{background:radial-gradient(ellipse at 55% -35%,#6b8eae66,transparent 77%),linear-gradient(155deg,#172e43,#0a1826)}
+#footprint .visit-card{border-color:#42617c;box-shadow:0 22px 65px #0007,inset 0 1px #b5d9ff21}
+
+/* Abstract, unlabelled terrain decorates only the empty-photo state. */
+#footprint .photo-empty[data-cover=""]{position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(ellipse at 70% 0,#58779244,transparent 75%),linear-gradient(160deg,#152a3d,#091523)}
+#footprint .photo-empty[data-cover=""]::before{content:"";position:absolute;inset:30% 0 0;z-index:-1;background:linear-gradient(160deg,#45607a45,#182d4230);clip-path:polygon(0 63%,12% 42%,21% 57%,39% 18%,47% 35%,58% 9%,74% 48%,85% 30%,100% 60%,100% 100%,0 100%);pointer-events:none}
+#footprint .photo-empty[data-cover=""] svg{filter:drop-shadow(0 2px 8px #0008)}
+#footprint .photo-empty[data-cover=""]>span{color:#d5e5f3;text-shadow:0 2px 7px #000}
+#footprint .visit-stats>div{background:linear-gradient(145deg,#18304755,#0a162033);border-color:#36516a}
+#footprint .card-heading h2{letter-spacing:.035em}
+
+/* A quieter editorial hierarchy within the fixed globe-and-record composition. */
+#footprint .visit-card{width:clamp(360px,29%,440px);padding:27px 26px 26px;border-radius:8px;background:radial-gradient(ellipse at 88% 0,#23415b66,transparent 48%),linear-gradient(160deg,#0d1d2ef5,#080f18fa)}
+#footprint .card-heading{min-height:69px;margin-bottom:22px}
+#footprint .card-heading h2{font-family:Georgia,"Noto Serif SC","Songti SC",SimSun,serif;font-weight:600;font-size:32px;line-height:1.3;letter-spacing:.04em}
+#footprint .card-heading-copy span{font-size:13px;letter-spacing:.06em;color:#9fb6ca}
+#footprint #card-region-shape{opacity:.38;width:116px;height:94px}
+#footprint .photo-empty{height:200px}
+#footprint .photo-empty[data-cover=""]::before{inset:15% 0 0;clip-path:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20600%20230%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22%23486680%22%20opacity%3D%22.18%22%20d%3D%22M0%20150%2045%20123%2072%20133%20139%2066%20176%20105%20229%2043%20275%2081%20311%2054%20379%20113%20416%2083%20467%20118%20509%2071%20600%20139V230H0Z%22%2F%3E%3Cpath%20fill%3D%22%23203b53%22%20opacity%3D%22.7%22%20d%3D%22M0%20158Q50%20117%2096%20155L161%20124%20201%20154%20271%20113%20324%20149%20370%20134%20435%20165%20501%20127%20600%20164V230H0Z%22%2F%3E%3Cpath%20fill%3D%22%230a1928%22%20opacity%3D%22.65%22%20d%3D%22M0%20197Q57%20157%20124%20182T251%20189Q316%20156%20385%20184T510%20182L600%20201V230H0Z%22%2F%3E%3Cpath%20fill%3D%22none%22%20stroke%3D%22%2388a9c4%22%20opacity%3D%22.14%22%20d%3D%22m139%2066%2037%2039%2053-62%2046%2038%2036-27%2068%2059%22%2F%3E%3C%2Fsvg%3E") center bottom/100% 100% no-repeat}
+#footprint .photo-empty[data-cover=""]::after{color:#adc0d1;font-size:12px}
+#footprint .visit-stats{margin:22px 0;gap:14px}
+#footprint .visit-stats>div{padding:16px 14px 17px;border-radius:5px;box-shadow:inset 0 1px #b4d6f00a}
+#footprint .visit-stats dd{font-variant-numeric:tabular-nums}
+#footprint .map-actions button{height:46px;border-radius:5px;transition:background 150ms ease,border-color 150ms ease,box-shadow 150ms ease,color 150ms ease}
+#footprint .map-actions button:focus-visible{outline:2px solid #b2dcff;outline-offset:3px}
+#footprint .bottom-hint{gap:12px;font-size:12px;letter-spacing:.08em;color:#adc1d3}
+#footprint .bottom-hint .drag-icon{width:47px;height:35px;fill:none;stroke:#9ac7eb;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;flex:none}
+@container footprint (max-width:1100px){#footprint .visit-card{width:min(420px,calc(100% - 40px));padding:22px}#footprint .card-heading h2{font-size:28px}#footprint .photo-empty{height:174px}#footprint .map-actions button{height:40px}}
+@container footprint (max-width:520px){#footprint .visit-card{width:calc(100% - 40px);padding:20px}#footprint .photo-empty{height:158px}#footprint .visit-stats{gap:10px}#footprint .visit-stats>div{padding:13px 10px}#footprint .bottom-hint{font-size:11px;letter-spacing:0}#footprint .bottom-hint .drag-icon{width:37px;height:28px}}
+@media(prefers-reduced-motion:reduce){#footprint .map-actions button{transition:none}}
+
+/* Quiet scene cues stay separate from actual geographic highlights. */
+#footprint .footprint-legend{position:absolute;left:30px;bottom:68px;display:flex;align-items:center;gap:11px;padding:13px 16px;border:1px solid #33516a;border-radius:7px;background:linear-gradient(145deg,#102337c9,#080f18e6);box-shadow:inset 0 1px #b4d6f00a;color:#c3d6e6;font-size:13px;letter-spacing:.04em;pointer-events:none}
+#footprint .legend-dot{width:8px;height:8px;border-radius:50%;background:#91d3ff;box-shadow:0 0 0 3px #438cc940,0 0 13px #5db6fa50}
+#footprint .footprint-legend strong{padding-left:12px;margin-left:3px;border-left:1px solid #3f5970;color:#ebf5fc;font:500 17px/1.2 ui-monospace,monospace;font-variant-numeric:tabular-nums}
+@container footprint (max-width:1100px){#footprint .footprint-legend{display:none}}
+
+
+/* Refined record surface: preserve the existing empty-photo artwork and geometry. */
+#footprint .visit-card {
+  background:radial-gradient(ellipse at 20% 0,#29415836,transparent 58%),linear-gradient(155deg,#111e2af7,#0a121bfB 76%);
+  border-color:rgba(109, 139, 160, 0.38);
+  box-shadow:inset 0 1px 0 rgba(180, 215, 255, 0.14),0 20px 48px rgba(0, 0, 0, 0.65),0 4px 12px rgba(0, 0, 0, 0.4);
+}
+#footprint .card-pin { filter:drop-shadow(0 0 6px #7eb9e525); }
+#footprint #card-region-shape { opacity:.38; stroke:#8eb5da; stroke-width:.65; filter:drop-shadow(0 0 6px rgba(70, 145, 225, 0.22)); }
+#footprint .visit-stats>div {
+  background:linear-gradient(145deg,#1e304138,#0c172324);
+  border-color:#6c8ba02e;
+  box-shadow:inset 0 1px #d6eaff09;
+}
+#footprint .visit-stats dt { color:#b8c9d7; }
+#footprint .visit-stats dd { color:#e4eff8; }
+#footprint .location-note { border-top-color:#7791a333; }
+#footprint .card-coordinates { color:#9bafc0; }
+#footprint .photo-empty { border-color:#8ba9c03b;box-shadow:inset 0 1px #d2e5f50b; }
+#footprint[data-earth-textured="true"] .sphere-outline { opacity:.22; }
+
+/* 2026-11-03 Visual Polish: Direction B — Basalt Ink & Restrained Champagne Gold Editorial Card */
+#footprint .visit-card {
+  width:clamp(276px, 20vw, 304px);
+  padding:20px 20px 15px;
+  border-radius:6px;
+  border:1px solid rgba(235, 226, 212, 0.13);
+  background:
+    radial-gradient(120% 80% at 12% 0%, rgba(208, 178, 132, 0.07) 0%, transparent 58%),
+    linear-gradient(168deg, rgba(19, 19, 22, 0.86) 0%, rgba(11, 12, 14, 0.92) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(245, 236, 222, 0.13),
+    0 20px 48px rgba(0, 0, 0, 0.68),
+    0 4px 14px rgba(0, 0, 0, 0.42);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
+#footprint .card-heading {
+  position:relative;
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  min-height:44px;
+  margin-bottom:14px;
+}
+#footprint .card-pin {
+  width:15px;
+  height:19px;
+  margin-top:4px;
+  fill:#c8ab83;
+  filter:none;
+}
+#footprint .card-pin circle {
+  fill:#121215;
+}
+#footprint .card-heading-copy {
+  padding-right:64px;
+  max-width:100%;
+  min-width:0;
+}
+#footprint .card-title-row {
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:6px 9px;
+}
+#footprint .card-heading h2 {
+  font:600 21px/1.25 Georgia,"Noto Serif SC","Songti SC","STSong",SimSun,serif;
+  letter-spacing:.06em;
+  color:#eeeae4;
+  margin:0;
+}
+#footprint .card-heading-copy #card-role {
+  display:inline-flex;
+  align-items:center;
+  margin:0;
+  padding:1px 7px;
+  border-radius:3px;
+  background:rgba(200, 171, 131, 0.10);
+  border:1px solid rgba(200, 171, 131, 0.28);
+  font-size:11px;
+  line-height:1.45;
+  letter-spacing:.06em;
+  color:#d4ba96;
+}
+#footprint .card-heading-copy #card-role:empty {
+  display:none;
+}
+#footprint .card-coordinates {
+  margin:6px 0 0 0;
+  padding:0;
+  display:block;
+  white-space:nowrap;
+  background:none;
+  border:0;
+  color:#8f8a82;
+  font:400 11.5px/1.35 ui-monospace,"SFMono-Regular",Consolas,monospace;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.03em;
+}
+#footprint #card-region-shape {
+  right:-4px;
+  top:-4px;
+  width:74px;
+  height:58px;
+  opacity:.52;
+  fill:rgba(200, 171, 131, 0.05);
+  stroke:rgba(208, 184, 150, 0.32);
+  stroke-width:.75;
+  filter:none;
+}
+#footprint .photo-empty,
+#footprint .photo-empty[data-cover=""] {
+  height:96px;
+  border-radius:4px;
+  border:1px solid rgba(230, 222, 210, 0.09);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(208, 178, 132, 0.04), transparent 70%),
+    linear-gradient(180deg, rgba(11, 12, 14, 0.72), rgba(7, 8, 10, 0.88));
+  box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.5);
+  gap:5px;
+}
+#footprint .photo-empty[data-cover=""]::before {
+  display:none !important;
+}
+#footprint .photo-empty svg,
+#footprint .photo-empty[data-cover=""] svg {
+  width:22px;
+  height:19px;
+  stroke:rgba(200, 186, 166, 0.45);
+  stroke-width:1.1;
+  filter:none;
+  opacity:1;
+}
+#footprint .photo-empty>span,
+#footprint .photo-empty[data-cover=""]>span {
+  font-size:12px;
+  color:#c2bbb0;
+  text-shadow:none;
+  letter-spacing:.08em;
+}
+#footprint .photo-empty[data-cover=""]::after {
+  font-size:11px;
+  color:#78726a;
+  letter-spacing:.04em;
+}
+#footprint .visit-stats {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  margin:14px 0 12px;
+  padding:12px 0 4px;
+  border-top:1px solid rgba(230, 222, 210, 0.09);
+}
+#footprint .visit-stats>div {
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  padding:0 10px 0 2px;
+  background:none;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+}
+#footprint .visit-stats div+div {
+  padding-left:15px;
+  border-left:1px solid rgba(230, 222, 210, 0.09);
+}
+#footprint .visit-stats dt {
+  color:#8f8a82;
+  font-size:11.5px;
+  gap:6px;
+  letter-spacing:.06em;
+}
+#footprint .visit-stats dt svg {
+  width:14px;
+  height:15px;
+  stroke:#9e9589;
+}
+#footprint .visit-stats>div:first-child svg {
+  fill:#9e9589;
+  stroke:none;
+}
+#footprint .visit-stats dd {
+  margin:7px 0 0 0;
+  color:#eeeae4;
+  font:500 21px/1.1 Georgia,"Noto Serif SC",serif;
+  font-variant-numeric:tabular-nums;
+  min-height:22px;
+  letter-spacing:.02em;
+}
+#footprint .visit-stats dd.visit-date {
+  margin-top:8px;
+  font:400 12px/1.4 ui-monospace,"SFMono-Regular",Consolas,monospace;
+  color:#d8d2c9;
+  letter-spacing:0;
+}
+#footprint .location-note {
+  padding:11px 0 0;
+  border-top:1px solid rgba(230, 222, 210, 0.09);
+  font-size:11.5px;
+  color:#969087;
+  gap:6px;
+  letter-spacing:.04em;
+}
+#footprint .location-icon {
+  font-size:15px;
+  color:#c8ab83;
+}
+#footprint .connector-end {
+  fill:#eeeae4;
+  stroke:#c8ab83;
+  stroke-width:1.2;
+  pointer-events:none;
+}
+#footprint[data-earth-textured="true"] .lit-land {
+  fill-opacity:.64;
+  stroke:#a8dcff;
+  stroke-width:1.2;
+}
+#footprint[data-earth-textured="true"] .visited-land {
+  fill-opacity:.62;
+  stroke:#8cc8f5;
+  stroke-width:1;
+}
+#footprint[data-earth-textured="true"] .province {
+  stroke:#bad6ee;
+  stroke-width:.56;
+  stroke-opacity:.52;
+  stroke-linejoin:round;
+}
+#footprint[data-earth-textured="true"] .map-land {
+  stroke:#a8c5de;
+  stroke-width:.52;
+  stroke-opacity:.42;
+}
+#footprint[data-earth-textured="true"] .ocean-grid {
+  stroke-opacity:.14;
+  stroke-dasharray:2 3;
+}
+#footprint .map-marker {
+  fill:#f2faff;
+  stroke:#8fd0ff;
+  stroke-width:1.5;
+  filter:url(#point-glow);
+}
+#footprint .marker-ring {
+  stroke:#a8dcff;
+  stroke-width:1.15;
+  stroke-dasharray:4 2.5;
+}
+#footprint .connector {
+  fill:none;
+  stroke:#9ed4ff;
+  stroke:url(#connector-gradient);
+  stroke-width:1.35;
+  opacity:.95;
+}
+#footprint .region-label {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 12px;
+  border-radius:6px;
+  background:linear-gradient(145deg,rgba(14, 28, 45, 0.76),rgba(8, 16, 27, 0.86));
+  border:1px solid rgba(135, 188, 235, 0.38);
+  box-shadow:inset 0 1px 0 rgba(205, 234, 255, 0.16),0 8px 24px rgba(1, 6, 14, 0.5);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  color:#edf5fc;
+  font-size:12.5px;
+  letter-spacing:.06em;
+}
+#footprint .region-label[hidden] { display:none; }
+#footprint .region-label::before {
+  content:"";
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:rgba(154, 182, 206, 0.55);
+  flex:none;
+}
+#footprint .region-label[data-visited="true"]::before {
+  background:#8ad0ff;
+  box-shadow:0 0 8px rgba(110, 195, 255, 0.85);
+}
+#footprint .footprint-legend {
+  bottom:72px;
+  border-radius:7px;
+  border-color:rgba(90, 138, 178, 0.36);
+  background:linear-gradient(145deg,rgba(14, 30, 48, 0.72),rgba(8, 16, 26, 0.82));
+  box-shadow:inset 0 1px 0 rgba(185, 220, 255, 0.12),0 8px 20px rgba(0, 0, 0, 0.35);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+#footprint .source-notes {
+  bottom:22px;
+  left:30px;
+}
+#footprint .source-notes summary {
+  display:inline-flex;
+  align-items:center;
+  padding:7px 13px;
+  border-radius:6px;
+  border:1px solid rgba(90, 134, 172, 0.32);
+  background:rgba(11, 23, 36, 0.68);
+  box-shadow:inset 0 1px 0 rgba(180, 215, 255, 0.1),0 4px 14px rgba(0, 0, 0, 0.3);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  color:#b6cce0;
+  font-size:12px;
+  letter-spacing:.05em;
+  transition:border-color 150ms ease,color 150ms ease,background 150ms ease;
+}
+#footprint .source-notes summary:hover {
+  border-color:rgba(140, 195, 255, 0.68);
+  background:rgba(18, 36, 56, 0.84);
+  color:#eaf4ff;
+}
+#footprint .source-content {
+  bottom:42px;
+  border-radius:8px;
+  border-color:rgba(105, 150, 188, 0.38);
+  background:linear-gradient(155deg,rgba(13, 26, 42, 0.88),rgba(7, 15, 25, 0.94));
+  box-shadow:inset 0 1px 0 rgba(190, 225, 255, 0.14),0 18px 44px rgba(0, 0, 0, 0.65);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+@container footprint (max-width:1100px) {
+  #footprint .visit-card {
+    width:min(320px, calc(100% - 36px));
+    padding:16px 16px 13px;
+  }
+}
+@container footprint (max-width:520px) {
+  #footprint .visit-card {
+    width:min(300px, calc(100% - 32px));
+    padding:15px 15px 12px;
+  }
+  #footprint .card-heading-copy { padding-right:64px; }
+  #footprint #card-region-shape { width:72px; height:56px; }
+  #footprint .photo-empty { height:104px; }
+  #footprint .source-notes { left:16px; bottom:14px; }
+  #footprint .source-notes summary { padding:5px 10px; font-size:11px; }
+}
+
+

@@ -1,0 +1,30 @@
+{
+  "residenceId": "CN-44",
+  "settingsTitle": "公开到访记录（示例配置）",
+  "visits": [
+    {
+      "id": "yunnan-2026",
+      "regionId": "CN-53",
+      "name": "云南省",
+      "title": "滇西北苍山洱海行",
+      "startDate": "2026-08-12",
+      "endDate": "2026-08-18",
+      "coordinate": [100.23, 25.60],
+      "locationLevel": "大理 · 坐标定位",
+      "remark": "示例行程：可在 src/data/footprints.sample.json 中替换为你的真实足迹。",
+      "demo": true
+    },
+    {
+      "id": "zhejiang-2026",
+      "regionId": "CN-33",
+      "name": "浙江省",
+      "title": "西湖秋日漫步",
+      "startDate": "2026-10-02",
+      "endDate": "2026-10-05",
+      "coordinate": [120.15, 30.28],
+      "locationLevel": "杭州 · 坐标定位",
+      "remark": "示例行程：支持配置多次到访同一省份，自动计算到访次数与点亮亮度。",
+      "demo": true
+    }
+  ]
+}

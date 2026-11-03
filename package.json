@@ -1,0 +1,32 @@
+{
+  "name": "footprint-globe",
+  "version": "1.0.0",
+  "description": "An interactive 3D WebGL + D3 Orthographic Footprint Globe with NASA Blue/Black Marble terrain and editorial basalt-gold detail cards.",
+  "author": "曾威长/Over9rowth (https://x.com/Over9rowth)",
+  "copyright": "Copyright (c) 2026 曾威长/Over9rowth",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "globe",
+    "footprints",
+    "travel-map",
+    "d3-geo",
+    "webgl",
+    "nasa-blue-marble",
+    "interactive-map",
+    "personal-website"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.8.2",
+    "vite": "^6.2.0"
+  }
+}

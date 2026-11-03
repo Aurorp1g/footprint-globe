@@ -1,7 +1,16 @@
 # 🌍 Footprint Globe · 足迹数字地球
 
-> 一个兼具**天文台球面材质**与 <strong>人文地理杂志质感（玄墨微金）</strong> 的开源个人旅行足迹数字地球。  
+<p align="left">
+  <a href="https://over9rowth.github.io/footprint-globe/" target="_blank"><img src="https://img.shields.io/badge/Live_Demo-在线交互预览-c8ab83?style=flat-square&logo=github" alt="Live Demo" /></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="MIT License" /></a>
+  <img src="https://img.shields.io/badge/Engine-WebGL_%2B_D3.js-4e85ae?style=flat-square" alt="WebGL + D3.js" />
+  <img src="https://img.shields.io/badge/Data-NASA_%2B_Natural_Earth-2b5b84?style=flat-square" alt="Public Domain Data" />
+</p>
+
+> 一个兼具**天文台球面材质**与**人文地理杂志质感（玄墨微金）**的开源个人旅行足迹数字地球。  
 > 基于 **WebGL (NASA Blue Marble + Black Marble 昼夜地形着色器)** 与 **D3.js 正交球面投影 (Natural Earth 公共领域地理边界)** 构建，零前端框架锁定，开箱即用。
+>
+> 👉 **在线交互预览 (Live Demo)**：[https://over9rowth.github.io/footprint-globe/](https://over9rowth.github.io/footprint-globe/)
 
 ![Footprint Globe 预览效果图](./docs/preview.png)
 

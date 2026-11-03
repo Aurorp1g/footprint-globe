@@ -896,7 +896,8 @@
 #footprint .location-note { border-top-color:#7791a333; }
 #footprint .card-coordinates { color:#9bafc0; }
 #footprint .photo-empty { border-color:#8ba9c03b;box-shadow:inset 0 1px #d2e5f50b; }
-#footprint[data-earth-textured="true"] .sphere-outline { opacity:.22; }
+#footprint .nebula { display:none; }
+#footprint[data-earth-textured="true"] .sphere-outline { stroke:#e6f2ff; stroke-width:.85; opacity:.36; }
 
 /* 2026-11-03 Visual Polish: Aurora Mint & Celadon Jade Globe + Sharp Steel-Bordered Stacked Editorial Card */
 #footprint {

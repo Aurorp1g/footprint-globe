@@ -48,8 +48,9 @@ export function createEarthSurface(stage:HTMLElement, assetBase?: string):{rende
         float direction=.06+.94*pow(clamp(.5+dot(normalize(p+vec2(.0001)),normalize(vec2(.50,-.86)))*.5,0.,1.),1.8);
         if(r2>1.){
           float edge=max(0.,(1.045-r)/.045);
-          float halo=(pow(edge,3.)*.46+pow(edge,9.)*.44)*direction;
-          gl_FragColor=vec4(.28,.57,.95,halo);return;
+          float halo=(pow(edge,2.8)*.48+pow(edge,8.5)*.46)*direction;
+          vec3 haloColor=mix(vec3(.34,.64,.96),vec3(.88,.94,1.),pow(edge,3.2)*.52);
+          gl_FragColor=vec4(haloColor,halo);return;
         }
         vec3 normal=vec3(p,sqrt(max(0.,1.-r2)));
         vec3 geographic=normalize(inverseRotation*normal);
@@ -77,13 +78,13 @@ export function createEarthSurface(stage:HTMLElement, assetBase?: string):{rende
         float emission=smoothstep(.095,.68,max(0.,dot(observed.rg,vec2(.55,.45))-observed.b*.4));
         float nightVisibility=.30+.70*(1.-diffuse);
         color+=vec3(.76,.83,.93)*pow(emission,.72)*.82*nightReady*nightVisibility;
-        // Soft grazing-angle scatter blends the illuminated limb into the deep ocean.
+        // Soft grazing-angle scatter blends the illuminated limb into a crisp white-blue horizon.
         float grazing=pow(1.-normal.z,2.4);
-        color+=vec3(.025,.075,.145)*grazing*direction;
+        color+=vec3(.035,.085,.155)*grazing*direction;
         float rim=pow(1.-normal.z,3.8);
-        color+=vec3(.13,.33,.62)*rim*(.12+1.12*direction);
-        float thinRim=exp(-pow((r-.997)/.0035,2.));
-        color+=vec3(.48,.72,.98)*thinRim*direction*.72;
+        color+=vec3(.22,.46,.78)*rim*(.14+1.14*direction);
+        float thinRim=exp(-pow((r-.9965)/.0038,2.));
+        color+=vec3(.88,.95,1.)*thinRim*direction*.92;
         gl_FragColor=vec4(color,1.-smoothstep(.996,1.,r));
       }`));
     gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error('Program link failed');

@@ -624,6 +624,7 @@ export function mountFootprint(container, assetBase) {
       }
     }
     function render() {
+      drawStars();
       earthSurface?.render({width,height,cx,cy,radius,rotation:projection.rotate()});
       $("globe").dataset.rotation = projection
         .rotate()
@@ -654,7 +655,7 @@ export function mountFootprint(container, assetBase) {
       const shell=stage.closest('.footprint-immersion');
       const skyHeight=shell?shell.clientHeight:window.innerHeight;
       stage.style.setProperty('--fp-sky-height',skyHeight+'px');
-      drawFootprintStars(byId("starfield"),width,skyHeight,assetBase);
+      drawFootprintStars(byId("starfield"),width,skyHeight,assetBase,projection.rotate());
     }
     function resize() {
       if (disposed || !active() || stage.clientWidth < 60) return;

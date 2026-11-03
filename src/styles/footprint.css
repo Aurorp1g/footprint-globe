@@ -1,5 +1,5 @@
 /*!
- * Footprint Globe Stylesheet (Basalt Ink & Champagne Gold Editorial Edition)
+ * Footprint Globe Stylesheet (Aurora Mint & Sharp Steel-Bordered Editorial Edition)
  * Copyright (c) 2026 曾威长/Over9rowth. Released under the MIT License.
  */
 
@@ -898,59 +898,61 @@
 #footprint .photo-empty { border-color:#8ba9c03b;box-shadow:inset 0 1px #d2e5f50b; }
 #footprint[data-earth-textured="true"] .sphere-outline { opacity:.22; }
 
-/* 2026-11-03 Visual Polish: Direction B — Basalt Ink & Restrained Champagne Gold Editorial Card */
+/* 2026-11-03 Visual Polish: Aurora Mint & Celadon Jade Globe + Sharp Steel-Bordered Stacked Editorial Card */
 #footprint {
-  --fp-lit-start:#f6d89e;
-  --fp-lit-end:#cf9243;
+  --fp-lit-start:#3ddcb6;
+  --fp-lit-end:#22a889;
 }
 #footprint .visit-card {
-  width:clamp(324px, 24vw, 356px);
-  padding:22px 24px 18px;
-  border-radius:7px;
-  border:1px solid rgba(235, 226, 212, 0.15);
-  background:
-    radial-gradient(120% 80% at 12% 0%, rgba(208, 178, 132, 0.08) 0%, transparent 58%),
-    linear-gradient(168deg, rgba(19, 19, 22, 0.88) 0%, rgba(11, 12, 14, 0.94) 100%);
+  width:clamp(332px, 24.5vw, 368px);
+  padding:24px 24px 18px;
+  border-radius:2px;
+  border:1px solid rgba(118, 162, 198, 0.52);
+  background:linear-gradient(180deg, rgba(11, 16, 23, 0.95) 0%, rgba(8, 12, 18, 0.98) 100%);
   box-shadow:
-    inset 0 1px 0 rgba(245, 236, 222, 0.14),
-    0 22px 52px rgba(0, 0, 0, 0.7),
-    0 4px 14px rgba(0, 0, 0, 0.45);
+    inset 0 1px 0 rgba(185, 220, 250, 0.14),
+    0 22px 54px rgba(0, 0, 0, 0.72),
+    0 4px 14px rgba(0, 0, 0, 0.48);
   backdrop-filter:blur(14px);
   -webkit-backdrop-filter:blur(14px);
 }
 #footprint .card-heading {
   position:relative;
   display:flex;
+  flex-direction:column;
   align-items:flex-start;
-  gap:12px;
-  min-height:52px;
-  margin-bottom:16px;
+  gap:0;
+  min-height:84px;
+  margin-bottom:18px;
 }
 #footprint .card-pin {
-  width:17px;
-  height:21px;
-  margin-top:4px;
-  fill:#d8b888;
-  filter:drop-shadow(0 0 6px rgba(216, 184, 136, 0.25));
+  width:16px;
+  height:20px;
+  margin:0 0 12px 0;
+  fill:#64ecd4;
+  filter:drop-shadow(0 0 6px rgba(100, 236, 212, 0.35));
 }
 #footprint .card-pin circle {
-  fill:#121215;
+  fill:#0b1017;
 }
 #footprint .card-heading-copy {
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
   padding-right:76px;
   max-width:100%;
   min-width:0;
 }
 #footprint .card-title-row {
   display:flex;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:7px 10px;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:10px;
 }
 #footprint .card-heading h2 {
-  font:600 24px/1.25 Georgia,"Noto Serif SC","Songti SC","STSong",SimSun,serif;
-  letter-spacing:.06em;
-  color:#f2eee8;
+  font:600 25px/1.25 Georgia,"Noto Serif SC","Songti SC","STSong",SimSun,serif;
+  letter-spacing:.05em;
+  color:#eef4f8;
   margin:0;
 }
 #footprint .card-heading-copy #card-role {
@@ -958,49 +960,47 @@
   align-items:center;
   margin:0;
   padding:2px 8px;
-  border-radius:3px;
-  background:rgba(208, 178, 132, 0.12);
-  border:1px solid rgba(208, 178, 132, 0.32);
+  border-radius:2px;
+  background:rgba(32, 92, 88, 0.28);
+  border:1px solid rgba(94, 234, 212, 0.34);
   font-size:11.5px;
   line-height:1.45;
-  letter-spacing:.06em;
-  color:#dec39b;
+  letter-spacing:.05em;
+  color:#78f0d8;
 }
 #footprint .card-heading-copy #card-role:empty {
   display:none;
 }
 #footprint .card-coordinates {
-  margin:7px 0 0 0;
+  margin:9px 0 0 0;
   padding:0;
   display:block;
   white-space:nowrap;
   background:none;
   border:0;
-  color:#9a948b;
+  color:#7c8d9e;
   font:400 12px/1.35 ui-monospace,"SFMono-Regular",Consolas,monospace;
   font-variant-numeric:tabular-nums;
   letter-spacing:.03em;
 }
 #footprint #card-region-shape {
-  right:-4px;
-  top:-4px;
-  width:88px;
+  right:0;
+  top:0;
+  width:86px;
   height:68px;
-  opacity:.56;
-  fill:rgba(208, 178, 132, 0.06);
-  stroke:rgba(214, 188, 150, 0.36);
-  stroke-width:.8;
+  opacity:.48;
+  fill:rgba(130, 155, 180, 0.04);
+  stroke:rgba(140, 168, 194, 0.22);
+  stroke-width:.75;
   filter:none;
 }
 #footprint .photo-empty,
 #footprint .photo-empty[data-cover=""] {
   height:126px;
-  border-radius:5px;
-  border:1px solid rgba(230, 222, 210, 0.1);
-  background:
-    radial-gradient(ellipse at 50% 0%, rgba(208, 178, 132, 0.05), transparent 70%),
-    linear-gradient(180deg, rgba(11, 12, 14, 0.72), rgba(7, 8, 10, 0.88));
-  box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.5);
+  border-radius:6px;
+  border:1px solid rgba(140, 175, 205, 0.12);
+  background:linear-gradient(180deg, rgba(13, 19, 27, 0.72), rgba(9, 14, 21, 0.86));
+  box-shadow:none;
   gap:6px;
 }
 #footprint .photo-empty[data-cover=""]::before {
@@ -1008,9 +1008,9 @@
 }
 #footprint .photo-empty svg,
 #footprint .photo-empty[data-cover=""] svg {
-  width:26px;
-  height:22px;
-  stroke:rgba(206, 190, 168, 0.48);
+  width:25px;
+  height:21px;
+  stroke:rgba(130, 155, 178, 0.36);
   stroke-width:1.15;
   filter:none;
   opacity:1;
@@ -1018,13 +1018,13 @@
 #footprint .photo-empty>span,
 #footprint .photo-empty[data-cover=""]>span {
   font-size:13px;
-  color:#c8c1b6;
+  color:#d0dae5;
   text-shadow:none;
-  letter-spacing:.08em;
+  letter-spacing:.06em;
 }
 #footprint .photo-empty[data-cover=""]::after {
   font-size:11.5px;
-  color:#7e7870;
+  color:#647488;
   letter-spacing:.04em;
 }
 #footprint .visit-stats {
@@ -1033,7 +1033,7 @@
   gap:0;
   margin:16px 0 14px;
   padding:14px 0 4px;
-  border-top:1px solid rgba(230, 222, 210, 0.1);
+  border-top:1px solid rgba(140, 175, 205, 0.12);
 }
 #footprint .visit-stats>div {
   display:flex;
@@ -1047,27 +1047,27 @@
 }
 #footprint .visit-stats div+div {
   padding-left:16px;
-  border-left:1px solid rgba(230, 222, 210, 0.1);
+  border-left:1px solid rgba(140, 175, 205, 0.12);
 }
 #footprint .visit-stats dt {
-  color:#969087;
+  color:#8496aa;
   font-size:12px;
   gap:7px;
-  letter-spacing:.06em;
+  letter-spacing:.05em;
 }
 #footprint .visit-stats dt svg {
   width:15px;
   height:16px;
-  stroke:#b0a392;
+  stroke:#6ed4c6;
 }
 #footprint .visit-stats>div:first-child svg {
-  fill:#b0a392;
+  fill:#6ed4c6;
   stroke:none;
 }
 #footprint .visit-stats dd {
   margin:8px 0 0 0;
-  color:#f2eee8;
-  font:500 23px/1.1 Georgia,"Noto Serif SC",serif;
+  color:#e6eef6;
+  font:500 22px/1.1 Georgia,"Noto Serif SC",serif;
   font-variant-numeric:tabular-nums;
   min-height:24px;
   letter-spacing:.02em;
@@ -1075,53 +1075,59 @@
 #footprint .visit-stats dd.visit-date {
   margin-top:9px;
   font:400 12.5px/1.4 ui-monospace,"SFMono-Regular",Consolas,monospace;
-  color:#ddd7ce;
+  color:#d0dce8;
   letter-spacing:0;
 }
 #footprint .location-note {
   padding:12px 0 0;
-  border-top:1px solid rgba(230, 222, 210, 0.1);
+  border-top:1px solid rgba(140, 175, 205, 0.12);
   font-size:12px;
-  color:#9e988f;
+  color:#8496aa;
   gap:7px;
   letter-spacing:.04em;
 }
 #footprint .location-icon {
-  font-size:16px;
-  color:#d8b888;
+  font-size:15px;
+  color:#64ecd4;
 }
 #footprint .connector-end {
-  fill:#f4efe6;
-  stroke:#d8b888;
-  stroke-width:1.3;
+  fill:#78f0d8;
+  stroke:#38b89e;
+  stroke-width:1.2;
   pointer-events:none;
 }
 #footprint .lit-land {
-  stroke:#ffe3a8;
+  fill:rgba(148, 192, 162, 0.42);
+  stroke:#9ed6b4;
   stroke-width:1.15;
 }
 #footprint .visited-land {
-  stroke:#f0c980;
-  stroke-width:1;
+  stroke:#5eead4;
+  stroke-width:1.1;
 }
 #footprint[data-earth-textured="true"] .lit-land {
-  fill-opacity:.72;
-  stroke:#ffe6b3;
-  stroke-width:1.25;
+  fill:rgba(148, 192, 162, 0.42);
+  fill-opacity:1;
+  stroke:#a4d8b8;
+  stroke-width:1.2;
 }
 #footprint[data-earth-textured="true"] .visited-land {
-  fill-opacity:.68;
-  stroke:#f2cc85;
-  stroke-width:1.08;
+  fill-opacity:.64;
+  stroke:#64f0d4;
+  stroke-width:1.15;
+}
+#footprint .hover-land {
+  fill:rgba(120, 210, 185, 0.22);
+  stroke:#9ee8d4;
 }
 #footprint .hover-land.lit-hover {
-  fill:rgba(246, 206, 130, 0.28);
-  stroke:#ffecb8;
+  fill:rgba(94, 234, 212, 0.28);
+  stroke:#88f4dc;
 }
 #footprint .selected-land {
-  fill:rgba(242, 198, 122, 0.22);
-  stroke:#ffe8ad;
-  stroke-width:1.4;
+  fill:rgba(146, 176, 148, 0.30);
+  stroke:#a2ccb0;
+  stroke-width:1.35;
 }
 #footprint[data-earth-textured="true"] .province {
   stroke:#bad6ee;
@@ -1139,67 +1145,67 @@
   stroke-dasharray:2 3;
 }
 #footprint .map-marker {
-  fill:#fff8eb;
-  stroke:#e6be7e;
+  fill:#eafffa;
+  stroke:#5eead4;
   stroke-width:1.5;
   filter:url(#point-glow);
 }
 #footprint .marker-ring {
-  stroke:#e8c384;
+  stroke:#6ee7c8;
   stroke-width:1.15;
   stroke-dasharray:4 2.5;
 }
 #footprint .connector {
   fill:none;
-  stroke:#e4c492;
+  stroke:#7ed0ba;
   stroke:url(#connector-gradient);
-  stroke-width:1.35;
-  opacity:.95;
+  stroke-width:1.25;
+  opacity:.92;
 }
 #footprint .signal-dot {
-  background:#eab968;
-  box-shadow:0 0 9px rgba(242, 192, 108, 0.78);
+  background:#5eead4;
+  box-shadow:0 0 9px rgba(94, 234, 212, 0.72);
 }
 #footprint .map-actions button {
-  height:44px;
-  padding:9px 16px;
-  border:1px solid rgba(235, 226, 212, 0.16);
+  height:42px;
+  padding:8px 15px;
+  border:1px solid rgba(255, 255, 255, 0.11);
   border-radius:6px;
-  background:linear-gradient(165deg, rgba(20, 20, 24, 0.86), rgba(11, 12, 15, 0.92));
-  box-shadow:inset 0 1px 0 rgba(245, 236, 222, 0.12), 0 6px 20px rgba(0, 0, 0, 0.45);
-  color:#e6e1d8;
-  font-size:13.5px;
+  background:rgba(15, 18, 23, 0.88);
+  box-shadow:inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 6px 18px rgba(0, 0, 0, 0.45);
+  color:#dce4ee;
+  font-size:13px;
   letter-spacing:.04em;
   transition:background 150ms ease, border-color 150ms ease, box-shadow 150ms ease, color 150ms ease;
 }
 #footprint .map-actions button svg {
-  stroke:#d4b483;
+  stroke:#5eead4;
 }
 #footprint .map-actions button:hover {
-  border-color:rgba(208, 178, 132, 0.52);
-  background:linear-gradient(165deg, rgba(28, 27, 31, 0.92), rgba(16, 16, 20, 0.96));
-  box-shadow:inset 0 1px 0 rgba(248, 238, 220, 0.22), 0 0 16px rgba(208, 178, 132, 0.16);
-  color:#f6f2eb;
+  border-color:rgba(94, 234, 212, 0.45);
+  background:rgba(22, 27, 34, 0.94);
+  box-shadow:inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 0 14px rgba(94, 234, 212, 0.14);
+  color:#f4f8fc;
 }
 #footprint .map-actions button:hover svg {
-  stroke:#e8ca9c;
+  stroke:#7ef4dc;
 }
 #footprint .locator {
-  border-radius:7px;
-  border:1px solid rgba(235, 226, 212, 0.16);
-  background:linear-gradient(165deg, rgba(19, 19, 23, 0.94), rgba(11, 12, 15, 0.97));
-  box-shadow:inset 0 1px 0 rgba(245, 236, 222, 0.12), 0 16px 40px rgba(0, 0, 0, 0.65);
+  border-radius:6px;
+  border:1px solid rgba(118, 162, 198, 0.36);
+  background:rgba(11, 16, 23, 0.95);
+  box-shadow:0 16px 40px rgba(0, 0, 0, 0.65);
   backdrop-filter:blur(14px);
   -webkit-backdrop-filter:blur(14px);
 }
 #footprint .locator label,
 #footprint .locator p {
-  color:#a8a298;
+  color:#8496aa;
 }
 #footprint .locator select {
-  background:#141519;
-  border:1px solid rgba(224, 212, 194, 0.24);
-  color:#eeeae4;
+  background:#111722;
+  border:1px solid rgba(118, 162, 198, 0.32);
+  color:#eef4f8;
 }
 #footprint .region-label {
   display:inline-flex;
@@ -1207,12 +1213,12 @@
   gap:8px;
   padding:6px 12px;
   border-radius:5px;
-  background:linear-gradient(160deg, rgba(20, 20, 24, 0.88), rgba(11, 12, 15, 0.94));
-  border:1px solid rgba(235, 226, 212, 0.2);
-  box-shadow:inset 0 1px 0 rgba(245, 236, 222, 0.14), 0 8px 24px rgba(0, 0, 0, 0.55);
+  background:rgba(13, 18, 25, 0.9);
+  border:1px solid rgba(118, 162, 198, 0.36);
+  box-shadow:0 8px 24px rgba(0, 0, 0, 0.55);
   backdrop-filter:blur(12px);
   -webkit-backdrop-filter:blur(12px);
-  color:#f2eee8;
+  color:#eef4f8;
   font-size:12.5px;
   letter-spacing:.06em;
 }
@@ -1222,30 +1228,30 @@
   width:6px;
   height:6px;
   border-radius:50%;
-  background:rgba(168, 162, 152, 0.55);
+  background:rgba(148, 163, 184, 0.55);
   flex:none;
 }
 #footprint .region-label[data-visited="true"]::before {
-  background:#f0c372;
-  box-shadow:0 0 8px rgba(242, 196, 112, 0.85);
+  background:#5eead4;
+  box-shadow:0 0 8px rgba(94, 234, 212, 0.85);
 }
 #footprint .footprint-legend {
   bottom:72px;
   border-radius:6px;
-  border:1px solid rgba(235, 226, 212, 0.16);
-  background:linear-gradient(165deg, rgba(20, 20, 24, 0.88), rgba(11, 12, 15, 0.94));
-  box-shadow:inset 0 1px 0 rgba(245, 236, 222, 0.12), 0 8px 20px rgba(0, 0, 0, 0.48);
-  color:#e6e1d8;
+  border:1px solid rgba(255, 255, 255, 0.11);
+  background:rgba(15, 18, 23, 0.88);
+  box-shadow:inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 8px 20px rgba(0, 0, 0, 0.48);
+  color:#dce4ee;
   backdrop-filter:blur(12px);
   -webkit-backdrop-filter:blur(12px);
 }
 #footprint .legend-dot {
-  background:#eab968;
-  box-shadow:0 0 0 3px rgba(216, 172, 96, 0.22), 0 0 12px rgba(238, 190, 108, 0.68);
+  background:#5eead4;
+  box-shadow:0 0 0 3px rgba(94, 234, 212, 0.2), 0 0 12px rgba(94, 234, 212, 0.65);
 }
 #footprint .footprint-legend strong {
-  border-left:1px solid rgba(216, 184, 136, 0.28);
-  color:#f2dec0;
+  border-left:1px solid rgba(255, 255, 255, 0.14);
+  color:#f0f6fc;
 }
 #footprint .source-notes {
   bottom:22px;
@@ -1256,38 +1262,38 @@
   align-items:center;
   padding:8px 14px;
   border-radius:6px;
-  border:1px solid rgba(235, 226, 212, 0.16);
-  background:linear-gradient(165deg, rgba(20, 20, 24, 0.86), rgba(11, 12, 15, 0.92));
-  box-shadow:inset 0 1px 0 rgba(245, 236, 222, 0.1), 0 6px 18px rgba(0, 0, 0, 0.45);
+  border:1px solid rgba(255, 255, 255, 0.11);
+  background:rgba(15, 18, 23, 0.86);
+  box-shadow:inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 6px 18px rgba(0, 0, 0, 0.45);
   backdrop-filter:blur(12px);
   -webkit-backdrop-filter:blur(12px);
-  color:#dfd9cf;
+  color:#c8d4e2;
   font-size:12.5px;
   letter-spacing:.05em;
   transition:border-color 150ms ease,color 150ms ease,background 150ms ease,box-shadow 150ms ease;
 }
 #footprint .source-notes summary::before {
-  color:#d4b483;
+  color:#5eead4;
   font-size:13px;
 }
 #footprint .source-notes summary:hover {
-  border-color:rgba(208, 178, 132, 0.52);
-  background:linear-gradient(165deg, rgba(28, 27, 31, 0.92), rgba(16, 16, 20, 0.96));
-  box-shadow:inset 0 1px 0 rgba(248, 238, 220, 0.2), 0 0 14px rgba(208, 178, 132, 0.14);
-  color:#f6f2eb;
+  border-color:rgba(94, 234, 212, 0.45);
+  background:rgba(22, 27, 34, 0.94);
+  box-shadow:inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 0 14px rgba(94, 234, 212, 0.14);
+  color:#f4f8fc;
 }
 #footprint .source-content {
   bottom:42px;
-  border-radius:7px;
-  border:1px solid rgba(235, 226, 212, 0.16);
-  background:linear-gradient(165deg, rgba(18, 18, 22, 0.95), rgba(10, 11, 14, 0.98));
-  box-shadow:inset 0 1px 0 rgba(245, 236, 222, 0.12), 0 18px 44px rgba(0, 0, 0, 0.7);
-  color:#b8b2a8;
+  border-radius:4px;
+  border:1px solid rgba(118, 162, 198, 0.4);
+  background:rgba(11, 16, 23, 0.96);
+  box-shadow:0 18px 44px rgba(0, 0, 0, 0.7);
+  color:#b0c0d0;
   backdrop-filter:blur(16px);
   -webkit-backdrop-filter:blur(16px);
 }
 #footprint .source-content a {
-  color:#d8b888;
+  color:#64ecd4;
 }
 @container footprint (max-width:1100px) {
   #footprint .visit-card {

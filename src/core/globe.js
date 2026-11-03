@@ -189,9 +189,9 @@ export function mountFootprint(container, assetBase) {
       .append("linearGradient")
       .attr("id", "connector-gradient")
       .attr("gradientUnits", "userSpaceOnUse");
-    connectorGrad.append("stop").attr("offset", "0%").attr("stop-color", "rgba(246, 214, 152, 0.95)");
-    connectorGrad.append("stop").attr("offset", "55%").attr("stop-color", "rgba(224, 196, 152, 0.68)");
-    connectorGrad.append("stop").attr("offset", "100%").attr("stop-color", "rgba(218, 204, 184, 0.52)");
+    connectorGrad.append("stop").attr("offset", "0%").attr("stop-color", "rgba(118, 238, 208, 0.92)");
+    connectorGrad.append("stop").attr("offset", "55%").attr("stop-color", "rgba(126, 208, 186, 0.65)");
+    connectorGrad.append("stop").attr("offset", "100%").attr("stop-color", "rgba(130, 196, 180, 0.48)");
     const limbFade = defs
       .append("radialGradient")
       .attr("id", "globe-limb-fade")

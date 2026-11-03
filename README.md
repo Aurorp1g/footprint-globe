@@ -1,6 +1,6 @@
 # 🌍 Footprint Globe · 足迹数字地球
 
-> 一个兼具**天文台球面材质**与**人文地理杂志质感（玄墨微金）**的开源个人旅行足迹数字地球。  
+> 一个兼具**天文台球面材质**与 <strong>人文地理杂志质感（玄墨微金）</strong> 的开源个人旅行足迹数字地球。  
 > 基于 **WebGL (NASA Blue Marble + Black Marble 昼夜地形着色器)** 与 **D3.js 正交球面投影 (Natural Earth 公共领域地理边界)** 构建，零前端框架锁定，开箱即用。
 
 ![Footprint Globe 预览效果图](./docs/preview.png)
@@ -35,7 +35,8 @@
 ### 1. 安装与本地运行
 
 ```bash
-cd D:/footprint-globe
+git clone https://github.com/Over9rowth/footprint-globe.git
+cd footprint-globe
 npm install
 npm run dev
 ```
@@ -117,4 +118,11 @@ await initFootprintGlobe({
 - **地理边界数据**：[Natural Earth](https://www.naturalearthdata.com/) (Public Domain)
 - **地球地形与夜光影像**：[NASA Visible Earth / Blue Marble Next Generation](https://science.nasa.gov/earth/earth-observatory/blue-marble-next-generation/base-topography/) & [NASA Black Marble 2016](https://science.nasa.gov/earth/earth-observatory/earth-at-night/maps/)
 - **球面投影引擎**：[D3.js](https://d3js.org/) (ISC License)
+
+---
+
+<p align="center">
+  <img src="./docs/suiren-badge.svg" alt="OVER9ROWTH · 燧人计划" width="400" />
+</p>
+
 

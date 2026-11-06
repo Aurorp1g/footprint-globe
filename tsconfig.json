@@ -12,6 +12,7 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "outDir": "dist",
+    "rootDir": "src",
     "strict": false,
     "allowJs": true
   },

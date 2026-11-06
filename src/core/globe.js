@@ -397,6 +397,11 @@ export function mountFootprint(container, assetBase) {
     let projectedPaths = new Map();
     let announceTimer = 0;
     let measuredCardHeight=0;
+    let zoomScale = 1;
+    const ZOOM_MIN = 0.4;
+    const ZOOM_MAX = 3.0;
+    const ZOOM_STEP = 0.12;
+    let pinchStart = null;
     probe.font = "13px Microsoft YaHei";
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
@@ -422,7 +427,7 @@ export function mountFootprint(container, assetBase) {
       }, 180);
     }
     function pointInsideGlobe(point) {
-      return Math.hypot(point[0] - cx, point[1] - cy) <= radius;
+      return Math.hypot(point[0] - cx, point[1] - cy) <= radius * zoomScale;
     }
     function featureAt(point) {
       if (!pointInsideGlobe(point)) return null;
@@ -625,7 +630,15 @@ export function mountFootprint(container, assetBase) {
     }
     function render() {
       drawStars();
-      earthSurface?.render({width,height,cx,cy,radius,rotation:projection.rotate()});
+      const zr = radius * zoomScale;
+      projection.scale(zr);
+      earthSurface?.render({width,height,cx,cy,radius:zr,rotation:projection.rotate()});
+      atmo.attr("r", zr * 1.045);
+      limbVignette.attr("r", zr);
+      land
+        .attr("cx", cx - zr * 0.3)
+        .attr("cy", cy - zr * 0.38)
+        .attr("r", zr * 1.6);
       $("globe").dataset.rotation = projection
         .rotate()
         .map((value) => value.toFixed(3))
@@ -681,22 +694,22 @@ export function mountFootprint(container, assetBase) {
         .attr("viewBox", `0 0 ${width} ${height}`)
         .attr("width", width)
         .attr("height", height);
-      projection.translate([cx, cy]).scale(radius);
+      projection.translate([cx, cy]).scale(radius * zoomScale);
       land
-        .attr("cx", cx - radius * 0.3)
-        .attr("cy", cy - radius * 0.38)
-        .attr("r", radius * 1.6);
+        .attr("cx", cx - radius * zoomScale * 0.3)
+        .attr("cy", cy - radius * zoomScale * 0.38)
+        .attr("r", radius * zoomScale * 1.6);
       atmo
         .attr("cx", cx)
         .attr("cy", cy)
-        .attr("r", radius * 1.045);
+        .attr("r", radius * zoomScale * 1.045);
       limbVignette
         .attr("cx", cx)
         .attr("cy", cy)
-        .attr("r", radius);
+        .attr("r", radius * zoomScale);
       $("gesture-hint").textContent = mobile
-        ? "单指拖动旋转 · 轻触查看"
-        : "拖动旋转 · 悬停高亮 · 点击查看";
+        ? "单指拖动旋转 · 捏合缩放 · 轻触查看"
+        : "拖动旋转 · 滚轮缩放 · 悬停高亮 · 点击查看";
       drawStars();
       render();
     }
@@ -779,7 +792,7 @@ export function mountFootprint(container, assetBase) {
       $("globe").classList.add("dragging");
       hovered = null;
       selected = null;
-      const factor = 72 / radius;
+      const factor = 72 / (radius * zoomScale);
       projection.rotate([
         drag.rotate[0] + dx * factor,
         clamp(drag.rotate[1] - dy * factor, -89, 89),
@@ -818,6 +831,7 @@ export function mountFootprint(container, assetBase) {
     });
     function resetView() {
       cancelDrag();
+      zoomScale = 1;
       projection.rotate([-105, -23, 0]);
       hovered = null;
       selected = null;
@@ -827,6 +841,55 @@ export function mountFootprint(container, assetBase) {
       announce(`已回到中国，当前常居地是${displayName(home)}。`);
     }
     on($("reset-view"), "click", resetView);
+    on($("zoom-in"), "click", () => {
+      zoomScale = clamp(zoomScale + ZOOM_STEP, ZOOM_MIN, ZOOM_MAX);
+      render();
+      announce(`地图已放大至 ${Math.round(zoomScale * 100)}%`);
+    });
+    on($("zoom-out"), "click", () => {
+      zoomScale = clamp(zoomScale - ZOOM_STEP, ZOOM_MIN, ZOOM_MAX);
+      render();
+      announce(`地图已缩小至 ${Math.round(zoomScale * 100)}%`);
+    });
+    on($("globe"), "wheel", (event) => {
+      event.preventDefault();
+      zoomScale = clamp(zoomScale + (event.deltaY > 0 ? -ZOOM_STEP : ZOOM_STEP), ZOOM_MIN, ZOOM_MAX);
+      render();
+    }, { passive: false });
+    let activePointers = new Map();
+    on($("globe"), "pointerdown", (event) => {
+      activePointers.set(event.pointerId, eventPoint(event));
+      if (activePointers.size >= 2) {
+        const pts = [...activePointers.values()];
+        pinchStart = { dist: Math.hypot(pts[1][0] - pts[0][0], pts[1][1] - pts[0][1]), scale: zoomScale };
+        return;
+      }
+      pinchStart = null;
+    });
+    on($("globe"), "pointermove", (event) => {
+      if (activePointers.has(event.pointerId)) {
+        activePointers.set(event.pointerId, eventPoint(event));
+      }
+      if (pinchStart && activePointers.size >= 2) {
+        const pts = [...activePointers.values()];
+        const dist = Math.hypot(pts[1][0] - pts[0][0], pts[1][1] - pts[0][1]);
+        zoomScale = clamp(pinchStart.scale * (dist / pinchStart.dist), ZOOM_MIN, ZOOM_MAX);
+        render();
+        return;
+      }
+    });
+    on($("globe"), "pointerup", (event) => {
+      activePointers.delete(event.pointerId);
+      if (activePointers.size < 2) pinchStart = null;
+    });
+    on($("globe"), "pointercancel", (event) => {
+      activePointers.delete(event.pointerId);
+      if (activePointers.size < 2) pinchStart = null;
+    });
+    on($("globe"), "pointerleave", (event) => {
+      activePointers.delete(event.pointerId);
+      if (activePointers.size < 2) pinchStart = null;
+    });
     on($("globe"), "keydown", (event) => {
       if (event.key === "Home") {
         event.preventDefault();
@@ -837,6 +900,18 @@ export function mountFootprint(container, assetBase) {
         selected = null;
         hovered = null;
         updateOverlay();
+        return;
+      }
+      if (event.key === "+" || event.key === "=") {
+        event.preventDefault();
+        zoomScale = clamp(zoomScale + ZOOM_STEP, ZOOM_MIN, ZOOM_MAX);
+        render();
+        return;
+      }
+      if (event.key === "-") {
+        event.preventDefault();
+        zoomScale = clamp(zoomScale - ZOOM_STEP, ZOOM_MIN, ZOOM_MAX);
+        render();
         return;
       }
       const change = {

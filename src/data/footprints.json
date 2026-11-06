@@ -1,0 +1,295 @@
+{
+  "residenceId": "CN-44",
+  "settingsTitle": "我的足迹记录",
+  "visits": [
+    {
+      "id": "广东-汕头-1",
+      "regionId": "CN-44",
+      "name": "广东省",
+      "title": "家与父母之所在，生我养我之故乡",
+      "startDate": "2026-01-01",
+      "endDate": "2026-01-01",
+      "coordinate": [
+        116.7515585,
+        23.4694075
+      ],
+      "locationLevel": "汕头 · 坐标定位",
+      "remark": "家与父母之所在，生我养我之故乡",
+      "photoUrl": "/photos/汕头.jpg",
+      "photoAlt": "家与父母之所在，生我养我之故乡",
+      "demo": false
+    },
+    {
+      "id": "广东-佛山-2",
+      "regionId": "CN-44",
+      "name": "广东省",
+      "title": "明德博学，自强有为。 —— 佛山大学",
+      "startDate": "2026-01-01",
+      "endDate": "2026-01-01",
+      "coordinate": [
+        113.05519995153324,
+        23.139256979200038
+      ],
+      "locationLevel": "佛山 · 坐标定位",
+      "remark": "明德博学，自强有为。 —— 佛山大学",
+      "photoUrl": "/photos/佛山大学.jpg",
+      "photoAlt": "明德博学，自强有为。 —— 佛山大学",
+      "demo": false
+    },
+    {
+      "id": "广东-广州-3",
+      "regionId": "CN-44",
+      "name": "广东省",
+      "title": "广州大学城",
+      "startDate": "2026-01-01",
+      "endDate": "2026-01-01",
+      "coordinate": [
+        113.37255519426867,
+        23.04134533401302
+      ],
+      "locationLevel": "广州 · 坐标定位",
+      "remark": "广州大学城",
+      "photoUrl": "/photos/广州大学城.webp",
+      "photoAlt": "广州大学城",
+      "demo": false
+    },
+    {
+      "id": "广东-广州-4",
+      "regionId": "CN-44",
+      "name": "广东省",
+      "title": "时尚天河",
+      "startDate": "2026-01-01",
+      "endDate": "2026-01-01",
+      "coordinate": [
+        113.32507331873127,
+        23.133871156906
+      ],
+      "locationLevel": "广州 · 坐标定位",
+      "remark": "时尚天河",
+      "photoUrl": "/photos/时尚天河.jpg",
+      "photoAlt": "时尚天河",
+      "demo": false
+    },
+    {
+      "id": "广东-惠州-5",
+      "regionId": "CN-44",
+      "name": "广东省",
+      "title": "惠州工程职业学院",
+      "startDate": "2026-01-01",
+      "endDate": "2026-01-01",
+      "coordinate": [
+        114.37254439995398,
+        23.19477546969983
+      ],
+      "locationLevel": "惠州 · 坐标定位",
+      "remark": "惠州工程职业学院",
+      "photoUrl": "/photos/惠州工程职业学院.webp",
+      "photoAlt": "惠州工程职业学院",
+      "demo": false
+    },
+    {
+      "id": "广东-深圳-6",
+      "regionId": "CN-44",
+      "name": "广东省",
+      "title": "深圳大学",
+      "startDate": "2026-01-01",
+      "endDate": "2026-01-01",
+      "coordinate": [
+        113.9392870259391,
+        22.53222982679239
+      ],
+      "locationLevel": "深圳 · 坐标定位",
+      "remark": "深圳大学",
+      "photoUrl": "/photos/深圳大学.webp",
+      "photoAlt": "深圳大学",
+      "demo": false
+    },
+    {
+      "id": "广东-潮州-7",
+      "regionId": "CN-44",
+      "name": "广东省",
+      "title": "潮州",
+      "startDate": "2026-01-01",
+      "endDate": "2026-01-01",
+      "coordinate": [
+        116.6204223,
+        23.656593
+      ],
+      "locationLevel": "潮州 · 坐标定位",
+      "remark": "潮州",
+      "photoUrl": "/photos/潮州.jpg",
+      "photoAlt": "潮州",
+      "demo": false
+    },
+    {
+      "id": "广东-清远-8",
+      "regionId": "CN-44",
+      "name": "广东省",
+      "title": "清远职业技术学院",
+      "startDate": "2026-01-01",
+      "endDate": "2026-01-01",
+      "coordinate": [
+        113.0505994,
+        23.6832984
+      ],
+      "locationLevel": "清远 · 坐标定位",
+      "remark": "清远职业技术学院",
+      "photoUrl": "/photos/清远职业技术学院.jpg",
+      "photoAlt": "清远职业技术学院",
+      "demo": false
+    },
+    {
+      "id": "天津-天津-9",
+      "regionId": "CN-12",
+      "name": "天津市",
+      "title": "五大道文化旅游区",
+      "startDate": "2026-01-01",
+      "endDate": "2026-01-01",
+      "coordinate": [
+        117.21513048694564,
+        39.11476238885808
+      ],
+      "locationLevel": "天津 · 坐标定位",
+      "remark": "五大道文化旅游区",
+      "photoUrl": "/photos/五大道文化旅游区.jpg",
+      "photoAlt": "五大道文化旅游区",
+      "demo": false
+    },
+    {
+      "id": "天津-天津-10",
+      "regionId": "CN-12",
+      "name": "天津市",
+      "title": "西开教堂",
+      "startDate": "2026-01-01",
+      "endDate": "2026-01-01",
+      "coordinate": [
+        117.1940538571107,
+        39.11852840317171
+      ],
+      "locationLevel": "天津 · 坐标定位",
+      "remark": "西开教堂",
+      "photoUrl": "/photos/西开教堂.jpg",
+      "photoAlt": "西开教堂",
+      "demo": false
+    },
+    {
+      "id": "天津-天津-11",
+      "regionId": "CN-12",
+      "name": "天津市",
+      "title": "航母主题公园",
+      "startDate": "2026-01-01",
+      "endDate": "2026-01-01",
+      "coordinate": [
+        117.80783221918215,
+        39.1558636910502
+      ],
+      "locationLevel": "天津 · 坐标定位",
+      "remark": "航母主题公园",
+      "photoUrl": "/photos/航母主题公园.jpg",
+      "photoAlt": "航母主题公园",
+      "demo": false
+    },
+    {
+      "id": "天津-天津-12",
+      "regionId": "CN-12",
+      "name": "天津市",
+      "title": "南开大学（津南校区）",
+      "startDate": "2026-01-01",
+      "endDate": "2026-01-01",
+      "coordinate": [
+        117.34159905995243,
+        38.99336758541459
+      ],
+      "locationLevel": "天津 · 坐标定位",
+      "remark": "南开大学（津南校区）",
+      "photoUrl": "/photos/南开大学_津南校区.jpg",
+      "photoAlt": "南开大学（津南校区）",
+      "demo": false
+    },
+    {
+      "id": "天津-天津-13",
+      "regionId": "CN-12",
+      "name": "天津市",
+      "title": "国家会展中心",
+      "startDate": "2026-01-01",
+      "endDate": "2026-01-01",
+      "coordinate": [
+        117.38325889193851,
+        39.026212808070895
+      ],
+      "locationLevel": "天津 · 坐标定位",
+      "remark": "国家会展中心",
+      "photoUrl": "/photos/国家会展中心.jpg",
+      "photoAlt": "国家会展中心",
+      "demo": false
+    },
+    {
+      "id": "安徽-合肥-14",
+      "regionId": "CN-34",
+      "name": "安徽省",
+      "title": "中国科学技术大学",
+      "startDate": "2026-01-01",
+      "endDate": "2026-01-01",
+      "coordinate": [
+        117.26106560661114,
+        31.838618452289314
+      ],
+      "locationLevel": "合肥 · 坐标定位",
+      "remark": "中国科学技术大学",
+      "photoUrl": "/photos/中国科学技术大学.jpg",
+      "photoAlt": "中国科学技术大学",
+      "demo": false
+    },
+    {
+      "id": "安徽-合肥-15",
+      "regionId": "CN-34",
+      "name": "安徽省",
+      "title": "安徽省博物院",
+      "startDate": "2026-01-01",
+      "endDate": "2026-01-01",
+      "coordinate": [
+        117.27356973704205,
+        31.86621870000646
+      ],
+      "locationLevel": "合肥 · 坐标定位",
+      "remark": "安徽省博物院",
+      "photoUrl": "/photos/安徽省博物院.jpg",
+      "photoAlt": "安徽省博物院",
+      "demo": false
+    },
+    {
+      "id": "安徽-合肥-16",
+      "regionId": "CN-34",
+      "name": "安徽省",
+      "title": "渡江战役纪念馆",
+      "startDate": "2026-01-01",
+      "endDate": "2026-01-01",
+      "coordinate": [
+        117.33006063467568,
+        31.710075114492653
+      ],
+      "locationLevel": "合肥 · 坐标定位",
+      "remark": "渡江战役纪念馆",
+      "photoUrl": "/photos/渡江战役纪念馆.jpg",
+      "photoAlt": "渡江战役纪念馆",
+      "demo": false
+    },
+    {
+      "id": "安徽-合肥-17",
+      "regionId": "CN-34",
+      "name": "安徽省",
+      "title": "安徽省科学技术厅",
+      "startDate": "2026-01-01",
+      "endDate": "2026-01-01",
+      "coordinate": [
+        117.31414406776275,
+        31.741752238063388
+      ],
+      "locationLevel": "合肥 · 坐标定位",
+      "remark": "安徽省科学技术厅",
+      "photoUrl": "/photos/安徽省科学技术厅.webp",
+      "photoAlt": "安徽省科学技术厅",
+      "demo": false
+    }
+  ]
+}

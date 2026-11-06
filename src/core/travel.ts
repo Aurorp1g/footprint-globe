@@ -94,6 +94,18 @@ export function buildTravelDataset(input: FootprintConfigInput) {
         photo: latest?.photoUrl ? { id: latest.id, alt: latest.photoAlt, caption: "" } : null,
         src: latest?.photoUrl || null,
       },
+      photos: sorted
+        .filter((r) => r.photoUrl)
+        .map((r) => ({
+          id: r.id,
+          alt: r.photoAlt || r.title,
+          src: r.photoUrl,
+          coordinate: r.coordinate,
+          locationLevel: r.locationLevel,
+          startDate: r.startDate,
+          endDate: r.endDate,
+          demo: r.demo,
+        })),
     };
   });
 

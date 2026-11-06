@@ -555,16 +555,25 @@ export function mountFootprint(container, assetBase) {
         if(coordinateLabel)coordinateLabel.textContent=point&&point.every(Number.isFinite)
           ? (point[1]>=0?'北纬 ':'南纬 ')+Math.abs(point[1]).toFixed(2)+'°　'+(point[0]>=0?'东经 ':'西经 ')+Math.abs(point[0]).toFixed(2)+'°' : '';
         const box = stage.querySelector(".photo-empty"),
-          src = summary.cover.src || "";
-        if (box.dataset.cover !== src) {
-          box.dataset.cover = src;
+          photos = (summary.photos && summary.photos.length > 0) ? summary.photos : (summary.cover.src ? [{ id: summary.cover.photo?.id, alt: summary.cover.photo?.alt, src: summary.cover.src }] : []),
+          photoKey = summary.regionId;
+        if (card.dataset.photoKey !== photoKey) {
+          card.dataset.photoKey = photoKey;
+          card.dataset.photoIdx = "0";
+        }
+        const photoIdx = parseInt(card.dataset.photoIdx || "0", 10);
+        const currentPhoto = photos[photoIdx] || null;
+        const showNav = photos.length > 1;
+        if (box.dataset.currentPhoto !== (currentPhoto?.src || "")) {
+          box.dataset.currentPhoto = currentPhoto?.src || "";
+          box.dataset.cover = currentPhoto?.src || "";
           box.replaceChildren();
-          if (src) {
+          if (currentPhoto) {
             const img = document.createElement("img");
-            img.alt = summary.cover.photo.alt;
+            img.alt = currentPhoto.alt || "";
             img.loading = "lazy";
             img.src =
-              (assetBase ? (assetBase === "/" ? "" : assetBase.replace(/\/$/, "")) : (document.documentElement.dataset.previewPrefix || "")) + src;
+              (assetBase ? (assetBase === "/" ? "" : assetBase.replace(/\/$/, "")) : (document.documentElement.dataset.previewPrefix || "")) + currentPhoto.src;
             img.addEventListener(
               "error",
               () => {
@@ -575,6 +584,41 @@ export function mountFootprint(container, assetBase) {
               { once: true },
             );
             box.append(img);
+            if (showNav) {
+              const counter = document.createElement("span");
+              counter.className = "photo-counter";
+              counter.textContent = `${photoIdx + 1} / ${photos.length}`;
+              const prevBtn = document.createElement("button");
+              prevBtn.className = "photo-nav photo-prev";
+              prevBtn.setAttribute("aria-label", "上一张");
+              prevBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>';
+              const nextBtn = document.createElement("button");
+              nextBtn.className = "photo-nav photo-next";
+              nextBtn.setAttribute("aria-label", "下一张");
+              nextBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+              const navigate = (delta) => {
+                const idx = parseInt(card.dataset.photoIdx || "0", 10);
+                const newIdx = (idx + delta + photos.length) % photos.length;
+                card.dataset.photoIdx = String(newIdx);
+                const photo = photos[newIdx];
+                if (photo && photo.coordinate && photo.coordinate.every(Number.isFinite)) {
+                  summary.location.coordinate = photo.coordinate;
+                  summary.location.level = photo.locationLevel || "坐标定位";
+                }
+                if (photo && photo.startDate) {
+                  summary.latest = {
+                    id: photo.id,
+                    startDate: photo.startDate,
+                    endDate: photo.endDate || photo.startDate,
+                    demo: photo.demo || false,
+                  };
+                }
+                updateOverlay();
+              };
+              prevBtn.addEventListener("click", (e) => { e.stopPropagation(); navigate(-1); });
+              nextBtn.addEventListener("click", (e) => { e.stopPropagation(); navigate(1); });
+              box.append(prevBtn, counter, nextBtn);
+            }
           } else {
             const text = document.createElement("span");
             text.textContent = "尚未上传照片";

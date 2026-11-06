@@ -1,9 +1,15 @@
 import "./styles/demo.css";
-import sampleData from "./data/footprints.sample.json";
 import { buildTravelDataset } from "./core/travel";
 import { initFootprintGlobe } from "./index";
 
-const dataset = buildTravelDataset(sampleData);
+let rawData;
+try {
+  rawData = (await import("./data/footprints.json")).default;
+} catch {
+  rawData = (await import("./data/footprints.sample.json")).default;
+}
+
+const dataset = buildTravelDataset(rawData);
 
 const countEl = document.getElementById("visited-region-count");
 if (countEl) {
@@ -11,6 +17,5 @@ if (countEl) {
 }
 
 void initFootprintGlobe({
-  data: sampleData,
+  data: rawData,
 });
-

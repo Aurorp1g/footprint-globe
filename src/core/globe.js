@@ -402,6 +402,7 @@ export function mountFootprint(container, assetBase) {
     const ZOOM_MAX = 3.0;
     const ZOOM_STEP = 0.12;
     let pinchStart = null;
+    let flyAnimation = null;
     probe.font = "13px Microsoft YaHei";
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
@@ -733,6 +734,7 @@ export function mountFootprint(container, assetBase) {
     }
     on($("globe"), "pointerdown", (event) => {
       if (event.button !== 0 || drag || event.isPrimary === false) return;
+      cancelFly();
       const point = eventPoint(event);
       if (!pointInsideGlobe(point)) {
         selected = null;
@@ -801,6 +803,7 @@ export function mountFootprint(container, assetBase) {
       render();
     }
     function cancelDrag() {
+      cancelFly();
       const previous = drag;
       drag = null;
       pendingPointer = null;
@@ -829,15 +832,49 @@ export function mountFootprint(container, assetBase) {
         updateOverlay();
       }
     });
+    function cancelFly() {
+      if (flyAnimation) {
+        cancelAnimationFrame(flyAnimation);
+        flyAnimation = null;
+      }
+    }
+    function flyTo(targetRotate, targetZoom = zoomScale, duration = 800) {
+      cancelFly();
+      if (reducedMotion.matches) {
+        projection.rotate(targetRotate);
+        zoomScale = targetZoom;
+        render();
+        return;
+      }
+      const src = projection.rotate();
+      const srcGeo = [-src[0], -src[1]];
+      const tgtGeo = [-targetRotate[0], -targetRotate[1]];
+      const interp = d3.geoInterpolate(srcGeo, tgtGeo);
+      const srcZoom = zoomScale;
+      const startTime = performance.now();
+      function step(now) {
+        const elapsed = now - startTime;
+        const t = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        const [lon, lat] = interp(eased);
+        projection.rotate([-lon, -lat, 0]);
+        zoomScale = srcZoom + (targetZoom - srcZoom) * eased;
+        render();
+        if (t < 1) {
+          flyAnimation = requestAnimationFrame(step);
+        } else {
+          flyAnimation = null;
+        }
+      }
+      flyAnimation = requestAnimationFrame(step);
+    }
     function resetView() {
       cancelDrag();
-      zoomScale = 1;
-      projection.rotate([-105, -23, 0]);
+      flyTo([-105, -23, 0], 1);
       hovered = null;
       selected = null;
       pointer = null;
       $("region-select").value = "";
-      render();
       announce(`已回到中国，当前常居地是${displayName(home)}。`);
     }
     on($("reset-view"), "click", resetView);
@@ -922,6 +959,7 @@ export function mountFootprint(container, assetBase) {
       }[event.key];
       if (!change) return;
       event.preventDefault();
+      cancelFly();
       const current = projection.rotate();
       projection.rotate([
         current[0] + change[0],
@@ -956,14 +994,13 @@ export function mountFootprint(container, assetBase) {
       const feature = featureById.get(select.value);
       if (!feature) return;
       const coordinate = feature.properties.center;
-      projection.rotate([-coordinate[0], -coordinate[1], 0]);
+      flyTo([-coordinate[0], -coordinate[1], 0]);
       hovered = null;
       selected = feature;
       pointer = null;
       $("locator").hidden=true;
       $("open-locator").setAttribute("aria-expanded","false");
       $("open-locator").focus({preventScroll:true});
-      render();
       announce(
         `${displayName(feature)}，${feature === home ? "常居地" : summaries.has(feature.properties.id) ? "已点亮" : "未点亮"}。已手动定位。`,
       );
@@ -1036,6 +1073,7 @@ export function mountFootprint(container, assetBase) {
     on(reducedMotion, "change", resume);
     function dispose() {
       disposed = true;
+      cancelFly();
       stopDetailMotion(); hoverAnimation?.cancel();
       earthSurface?.dispose();
       cancelDrag();
